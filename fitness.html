@@ -1,0 +1,2203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FitFirst Time-Crunch Fitness Analyzer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap & Icons -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --ff-red: #e3063b;
+      --ff-red-dark: #a1042b;
+      --ff-dark: #111827;
+      --ff-bg: #020617;
+      --ff-card: #0b1120;
+      --ff-card-soft: #020617;
+      --ff-muted: #9ca3af;
+      --ff-accent: #22c55e;
+      --ff-border: #1f2937;
+      --ff-shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+      background:
+        radial-gradient(circle at 0 0, #1f2937 0, #020617 45%) fixed,
+        radial-gradient(circle at 100% 100%, #111827 0, #020617 40%) fixed;
+      color: #f9fafb;
+    }
+
+    a { text-decoration: none; }
+
+    /* Top Nav */
+    .ff-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.9),
+        rgba(15, 23, 42, 0.92)
+      );
+      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+    }
+
+    .ff-nav-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .ff-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ff-logo-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #fecaca, #b91c1c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 18px;
+      box-shadow: 0 0 0 2px rgba(248, 250, 252, 0.08);
+    }
+
+    .ff-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .ff-logo-text span:first-child {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+
+    .ff-logo-text span:last-child {
+      font-size: 11px;
+      color: var(--ff-muted);
+      text-transform: uppercase;
+    }
+
+    .ff-nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .ff-nav-links a {
+      color: #e5e7eb;
+      opacity: 0.85;
+    }
+
+    .ff-nav-links a:hover {
+      opacity: 1;
+      color: #fff;
+    }
+
+    .ff-nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ff-nav-cta span {
+      font-size: 11px;
+      color: var(--ff-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .ff-btn-nav {
+      border-radius: 999px;
+      border: none;
+      padding: 7px 16px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: linear-gradient(to right, var(--ff-red), var(--ff-red-dark));
+      color: #fff;
+      box-shadow: 0 10px 25px rgba(220, 38, 38, 0.4);
+    }
+
+    .ff-btn-nav:hover { filter: brightness(1.08); }
+
+    /* Layout */
+
+    .ff-main {
+      max-width: 1180px;
+      margin: 22px auto 40px;
+      padding: 0 16px 240px;
+    }
+
+    .ff-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 22px;
+    }
+
+    @media (max-width: 960px) {
+      .ff-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Hero */
+
+    .ff-hero-card {
+      background: radial-gradient(circle at top left, #1f2937 0, #020617 55%);
+      border-radius: var(--radius-lg);
+      padding: 22px 22px 18px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: var(--ff-shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ff-hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(22, 163, 74, 0.12);
+      border: 1px solid rgba(22, 163, 74, 0.4);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #bbf7d0;
+      margin-bottom: 8px;
+    }
+
+    .ff-hero-title {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      margin-bottom: 6px;
+    }
+
+    .ff-hero-highlight {
+      color: var(--ff-red);
+    }
+
+    .ff-hero-sub {
+      font-size: 13px;
+      color: var(--ff-muted);
+      max-width: 480px;
+    }
+
+    .ff-hero-metrics {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .ff-hero-pill {
+      min-width: 120px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(55, 65, 81, 0.85);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 11px;
+    }
+
+    .ff-pill-label {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ff-muted);
+    }
+
+    .ff-pill-value {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .ff-pill-subvalue {
+      font-size: 11px;
+      color: #a5b4fc;
+    }
+
+    .ff-hero-footer {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      font-size: 12px;
+      color: var(--ff-muted);
+    }
+
+    .ff-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      background: var(--ff-red);
+      display: inline-block;
+      margin: 0 5px;
+    }
+
+    .ff-chip {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 4px 9px;
+      font-size: 11px;
+      color: #e5e7eb;
+    }
+
+    /* Analyzer card */
+
+    .ff-card-block {
+      background: var(--ff-card);
+      border-radius: var(--radius-lg);
+      padding: 18px 18px 16px;
+      border: 1px solid var(--ff-border);
+      box-shadow: var(--ff-shadow);
+    }
+
+    .ff-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .ff-card-title {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ff-card-sub {
+      font-size: 11px;
+      color: var(--ff-muted);
+    }
+
+    .ff-badge-soft {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      padding: 3px 8px;
+      font-size: 11px;
+      color: var(--ff-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .ff-form-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ff-muted);
+      margin-bottom: 4px;
+    }
+
+    .ff-input {
+      background: #020617;
+      border-radius: 10px;
+      border: 1px solid #374151;
+      padding: 6px 10px;
+      color: #e5e7eb;
+      font-size: 13px;
+      width: 100%;
+    }
+
+    .ff-input:focus {
+      outline: none;
+      border-color: var(--ff-red);
+      box-shadow: 0 0 0 1px rgba(248, 113, 113, 0.5);
+    }
+
+    .ff-slider {
+      width: 100%;
+    }
+
+    .ff-btn-primary {
+      border-radius: 999px;
+      border: none;
+      padding: 8px 18px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      background: linear-gradient(to right, var(--ff-red), var(--ff-red-dark));
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(220, 38, 38, 0.5);
+    }
+
+    .ff-btn-primary:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .ff-small {
+      font-size: 11px;
+      color: var(--ff-muted);
+    }
+
+    /* Results */
+
+    .ff-score-ring {
+      width: 120px;
+      height: 120px;
+      border-radius: 999px;
+      border: 4px solid rgba(55, 65, 81, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      font-weight: 800;
+      font-size: 26px;
+    }
+
+    .ff-score-ring-inner {
+      width: 96px;
+      height: 96px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top, #1f2937, #020617);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .ff-score-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--ff-muted);
+    }
+
+    .ff-score-band {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 4px;
+    }
+
+    .ff-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0 4px;
+    }
+
+    .ff-mini-pill {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 4px 9px;
+      font-size: 11px;
+      color: #d1d5db;
+    }
+
+    .ff-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+      font-size: 13px;
+    }
+
+    .ff-list li {
+      margin-bottom: 6px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .ff-list li i {
+      margin-top: 3px;
+      color: var(--ff-accent);
+    }
+
+    .ff-section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ff-muted);
+      margin-bottom: 4px;
+    }
+
+    .ff-chip-band {
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+    }
+
+    .ff-chip-overloaded {
+      background: rgba(239, 68, 68, 0.15);
+      color: #fecaca;
+      border: 1px solid rgba(239, 68, 68, 0.6);
+    }
+
+    .ff-chip-tight {
+      background: rgba(234, 179, 8, 0.1);
+      color: #fef9c3;
+      border: 1px solid rgba(234, 179, 8, 0.7);
+    }
+
+    .ff-chip-sustainable {
+      background: rgba(22, 163, 74, 0.12);
+      color: #bbf7d0;
+      border: 1px solid rgba(22, 163, 74, 0.6);
+    }
+
+    .ff-chip-thriving {
+      background: rgba(59, 130, 246, 0.15);
+      color: #bfdbfe;
+      border: 1px solid rgba(59, 130, 246, 0.7);
+    }
+
+    .ff-mini-metric-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .ff-mini-metric {
+      background: rgba(15, 23, 42, 0.88);
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-height: 82px;
+    }
+
+    .ff-mini-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ff-muted);
+    }
+
+    .ff-mini-value {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .ff-mini-note {
+      font-size: 11px;
+      color: rgba(226, 232, 240, 0.78);
+    }
+
+    /* FitAI Coach */
+
+    .ff-ai-card {
+      background:
+        linear-gradient(150deg, rgba(15, 23, 42, 0.95), rgba(2, 6, 23, 0.97)),
+        radial-gradient(circle at top right, rgba(34, 197, 94, 0.08), transparent 60%);
+      border-radius: 24px;
+      padding: 24px;
+      border: 1px solid rgba(148, 163, 184, 0.42);
+      box-shadow: 0 32px 70px rgba(0, 0, 0, 0.78);
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 430px;
+      max-width: calc(100% - 32px);
+      z-index: 200;
+      backdrop-filter: blur(20px);
+    }
+
+    .ff-ai-card.hidden {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .ff-ai-card {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        width: auto;
+      }
+    }
+
+    .ff-ai-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .ff-ai-header > div:first-child {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .ff-ai-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ff-ai-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .ff-ai-model {
+      font-size: 11px;
+      border-radius: 999px;
+      padding: 3px 8px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--ff-muted);
+    }
+
+    .ff-ai-min-btn {
+      background: transparent;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      border-radius: 999px;
+      color: var(--ff-muted);
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      transition: border 0.2s, color 0.2s;
+    }
+
+    .ff-ai-min-btn:hover {
+      color: #fff;
+      border-color: #fff;
+    }
+
+    .ff-ai-launcher {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 18px;
+      background: linear-gradient(135deg, var(--ff-red), var(--ff-red-dark));
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 18px 40px rgba(220, 38, 38, 0.45);
+      z-index: 190;
+    }
+
+    .ff-ai-launcher.show {
+      display: inline-flex;
+    }
+
+    @media (max-width: 768px) {
+      .ff-ai-launcher {
+        left: 16px;
+        right: auto;
+      }
+    }
+
+    .ff-ai-body {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .ff-ai-section {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .ff-ai-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--ff-muted);
+    }
+
+    .ff-ai-chip {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      background: rgba(15, 23, 42, 0.65);
+      color: #e2e8f0;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: border 0.2s ease, color 0.2s ease, background 0.2s ease;
+    }
+
+    .ff-ai-chip i {
+      font-size: 12px;
+    }
+
+    .ff-ai-chip:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .ff-ai-chip:not(:disabled):hover {
+      border-color: var(--ff-accent);
+      color: var(--ff-accent);
+    }
+
+    .ff-ai-chip.ready:not(:disabled) {
+      background: rgba(34, 197, 94, 0.12);
+      border-color: rgba(34, 197, 94, 0.55);
+      color: #34d399;
+    }
+
+    .ff-ai-chip.danger:not(:disabled) {
+      background: rgba(220, 38, 38, 0.15);
+      border-color: rgba(248, 113, 113, 0.55);
+      color: #f87171;
+    }
+
+    .ff-ai-chip.neutral:not(:disabled) {
+      background: rgba(59, 130, 246, 0.12);
+      border-color: rgba(96, 165, 250, 0.55);
+      color: #93c5fd;
+    }
+
+    .ff-ai-textarea {
+      width: 100%;
+      min-height: 70px;
+      background: rgba(2, 6, 23, 0.9);
+      border-radius: 14px;
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      padding: 12px 14px;
+      font-size: 13px;
+      color: #f1f5f9;
+      line-height: 1.55;
+      resize: vertical;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+
+    .ff-ai-textarea:focus {
+      outline: none;
+      border-color: var(--ff-accent);
+      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.42);
+    }
+
+    .ff-ai-textarea.ff-ai-context {
+      min-height: 80px;
+    }
+
+    .ff-ai-textarea.ff-ai-question {
+      min-height: 64px;
+      max-height: 140px;
+    }
+
+    .ff-ai-hint {
+      font-size: 11px;
+      color: rgba(148, 163, 184, 0.85);
+      letter-spacing: 0.03em;
+    }
+
+    .ff-ai-response-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+    }
+
+    .ff-ai-response {
+      font-size: 13px;
+      line-height: 1.62;
+      background:
+        linear-gradient(170deg, rgba(30, 41, 59, 0.92), rgba(15, 23, 42, 0.96));
+      border-radius: 18px;
+      border: 1px solid rgba(71, 85, 105, 0.9);
+      padding: 16px 18px;
+      max-height: 260px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      position: relative;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      transition: box-shadow 0.2s ease;
+    }
+
+    .ff-ai-response:empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: rgba(226, 232, 240, 0.7);
+    }
+
+    .ff-ai-response:empty::before {
+      content: "⚡ Welcome to FitAI. Ask about habits, recovery, or time-saving routines.";
+      max-width: 260px;
+      line-height: 1.5;
+    }
+
+    .ff-ai-response.typing {
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.04),
+        0 0 0 1px rgba(34, 197, 94, 0.25);
+    }
+
+    .ff-ai-response.typing::after {
+      content: "";
+      width: 6px;
+      height: 1.1em;
+      border-radius: 2px;
+      background: linear-gradient(180deg, var(--ff-accent), #16a34a);
+      display: inline-block;
+      margin-left: 4px;
+      animation: ff-caret 0.75s steps(1) infinite;
+      vertical-align: bottom;
+    }
+
+    .ff-ai-quick {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .ff-ai-quick-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .ff-ai-status-row {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding-top: 6px;
+    }
+
+    .ff-ai-input-row {
+      display: flex;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .ff-ai-question-wrap .ff-ai-textarea {
+      flex: 1 1 auto;
+    }
+
+    .ff-ai-send-btn {
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--ff-red), var(--ff-red-dark));
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 0 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: filter 0.2s ease;
+    }
+
+    .ff-ai-send-btn i {
+      font-size: 13px;
+    }
+
+    .ff-ai-send-btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      filter: grayscale(0.2);
+    }
+
+    .ff-ai-send-btn:not(:disabled):hover {
+      filter: brightness(1.08);
+    }
+
+    @keyframes ff-caret {
+      0%,
+      50% {
+        opacity: 1;
+      }
+      51%,
+      100% {
+        opacity: 0;
+      }
+    }
+
+    .ff-status {
+      font-size: 11px;
+      color: var(--ff-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ff-status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #f97316;
+    }
+
+    .ff-status-dot.ok { background: #22c55e; }
+    .ff-status-dot.err { background: #ef4444; }
+
+    .ff-badge-warning {
+      font-size: 11px;
+      border-radius: 999px;
+      padding: 3px 8px;
+      background: rgba(234, 179, 8, 0.12);
+      color: #facc15;
+      border: 1px solid rgba(234, 179, 8, 0.6);
+    }
+
+    .ff-badge-ghost {
+      font-size: 11px;
+      border-radius: 999px;
+      padding: 2px 7px;
+      border: 1px dashed rgba(148, 163, 184, 0.6);
+      color: var(--ff-muted);
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <header class="ff-nav">
+    <div class="ff-nav-inner">
+      <div class="ff-logo">
+        <div class="ff-logo-mark">F1</div>
+        <div class="ff-logo-text">
+          <span>FitFirst</span>
+          <span>Time-Crunch Analyzer</span>
+        </div>
+      </div>
+      <nav class="ff-nav-links d-none d-md-flex">
+        <a href="#analyzer">Analyzer</a>
+        <a href="#plan">Micro-Habits</a>
+        <a href="#coach">FitAI Coach</a>
+      </nav>
+      <div class="ff-nav-cta d-none d-md-flex">
+        <span>For working professionals</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="ff-main">
+    <!-- HERO + ANALYZER -->
+    <div class="ff-grid" id="analyzer">
+      <!-- Left: Hero + Form -->
+      <div>
+        <section class="ff-hero-card mb-3">
+          <div class="ff-hero-tag">
+            <i class="fa-solid fa-briefcase-clock"></i>
+            <span>Built for 60-hour work weeks</span>
+          </div>
+          <h1 class="ff-hero-title">
+            Time-Crunch <span class="ff-hero-highlight">Fitness Analyzer</span>
+          </h1>
+          <p class="ff-hero-sub">
+            A data-science engine that turns your workday chaos into a
+            <strong>micro-habit fitness plan</strong>. No gyms, no 2-hour routines —
+            just science-backed 3–10 minute blocks that fit into your schedule.
+          </p>
+
+          <div class="ff-hero-metrics">
+            <div class="ff-hero-pill">
+              <span class="ff-pill-label">Daily Time Budget</span>
+              <span class="ff-pill-value" id="heroTimeBudget">–</span>
+              <span class="ff-pill-subvalue">Minutes you can realistically invest</span>
+            </div>
+            <div class="ff-hero-pill">
+              <span class="ff-pill-label">Time-Crunch Index</span>
+              <span class="ff-pill-value" id="heroIndex">–</span>
+              <span class="ff-pill-subvalue" id="heroIndexLabel">Run analyzer to see</span>
+            </div>
+            <div class="ff-hero-pill">
+              <span class="ff-pill-label">Micro-Habits</span>
+              <span class="ff-pill-value" id="heroHabits">–</span>
+              <span class="ff-pill-subvalue">Tiny actions, compound results</span>
+            </div>
+          </div>
+
+          <div class="ff-hero-footer">
+            <span class="ff-chip">
+              <i class="fa-solid fa-flask me-1"></i> Live insights engine
+            </span>
+            <span class="ff-chip d-none d-sm-inline">
+              <i class="fa-solid fa-robot me-1"></i> FitAI Coach – instant guidance
+            </span>
+          </div>
+        </section>
+
+        <section class="ff-card-block">
+          <div class="ff-card-header">
+            <div>
+              <div class="ff-card-title">
+                <i class="fa-solid fa-sliders"></i> Your Workday Inputs
+              </div>
+              <div class="ff-card-sub">
+                We simulate your week to compute a <strong>Time-Crunch Fitness
+                Score</strong> personalized to your schedule.
+              </div>
+            </div>
+            <span class="ff-badge-soft">
+              <i class="fa-solid fa-microchip"></i> Live Analysis Ready
+            </span>
+          </div>
+
+          <form id="fitnessForm">
+            <div class="row g-3">
+              <div class="col-6">
+                <label class="ff-form-label">Age</label>
+                <input
+                  type="number"
+                  min="18"
+                  max="80"
+                  step="1"
+                  class="ff-input"
+                  id="age"
+                  value="35"
+                />
+              </div>
+              <div class="col-6">
+                <label class="ff-form-label">BMI (approx)</label>
+                <input
+                  type="number"
+                  min="16"
+                  max="40"
+                  step="0.5"
+                  class="ff-input"
+                  id="bmi"
+                  value="27"
+                />
+              </div>
+
+              <div class="col-md-4">
+                <label class="ff-form-label">Work hours / day</label>
+                <input
+                  type="number"
+                  min="4"
+                  max="16"
+                  step="0.5"
+                  class="ff-input"
+                  id="work_hours"
+                  value="9"
+                />
+                <div class="ff-small">Office + meetings</div>
+              </div>
+              <div class="col-md-4">
+                <label class="ff-form-label">Commute (mins / day)</label>
+                <input
+                  type="number"
+                  min="0"
+                  max="180"
+                  step="5"
+                  class="ff-input"
+                  id="commute_minutes"
+                  value="60"
+                />
+                <div class="ff-small">Door to door</div>
+              </div>
+              <div class="col-md-4">
+                <label class="ff-form-label">Sitting time (hrs / day)</label>
+                <input
+                  type="number"
+                  min="4"
+                  max="16"
+                  step="0.5"
+                  class="ff-input"
+                  id="sitting_hours"
+                  value="9"
+                />
+                <div class="ff-small">Laptop + TV + phone</div>
+              </div>
+
+              <div class="col-md-4">
+                <label class="ff-form-label">Workouts / week</label>
+                <input
+                  type="number"
+                  min="0"
+                  max="7"
+                  step="1"
+                  class="ff-input"
+                  id="weekly_workouts"
+                  value="2"
+                />
+                <div class="ff-small">Gym, walk, sports, etc.</div>
+              </div>
+              <div class="col-md-4">
+                <label class="ff-form-label">Avg sleep (hrs / night)</label>
+                <input
+                  type="number"
+                  min="4"
+                  max="10"
+                  step="0.5"
+                  class="ff-input"
+                  id="avg_sleep"
+                  value="6.5"
+                />
+              </div>
+              <div class="col-md-4">
+                <label class="ff-form-label">Stress level</label>
+                <input
+                  type="range"
+                  min="1"
+                  max="5"
+                  step="1"
+                  class="ff-slider"
+                  id="stress_level"
+                  value="3"
+                />
+                <div class="ff-small">
+                  <span id="stressLabel">Moderate</span> stress
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="ff-form-label">Screen time after 9pm (hrs)</label>
+                <input
+                  type="number"
+                  min="0"
+                  max="6"
+                  step="0.5"
+                  class="ff-input"
+                  id="late_screen"
+                  value="2"
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="ff-form-label">Uninterrupted blocks / day</label>
+                <input
+                  type="number"
+                  min="0"
+                  max="6"
+                  step="1"
+                  class="ff-input"
+                  id="free_blocks"
+                  value="2"
+                />
+                <div class="ff-small">
+                  10–20 minute slots where you control your time
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <button
+                type="button"
+                id="runAnalysisBtn"
+                class="ff-btn-primary"
+                disabled
+              >
+                <i class="fa-solid fa-play me-1"></i> Run Analysis
+              </button>
+              <span class="ff-small" id="pyodideStatus">
+                <i class="fa-solid fa-circle-notch fa-spin me-1"></i>
+                Preparing your analysis…
+              </span>
+            </div>
+          </form>
+        </section>
+      </div>
+
+      <!-- Right: Results + FitAI -->
+      <div>
+        <section class="ff-card-block mb-3" id="plan">
+          <div class="ff-card-header">
+            <div>
+              <div class="ff-card-title">
+                <i class="fa-solid fa-chart-line"></i> Analytics Summary
+              </div>
+              <div class="ff-card-sub">
+                Time-Crunch Fitness Score, bottlenecks, and a <strong>micro-habit
+                schedule</strong> tuned for working professionals.
+              </div>
+            </div>
+            <span class="ff-badge-soft" id="bandBadge">
+              <i class="fa-solid fa-hourglass-half"></i> No run yet
+            </span>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-sm-4 d-flex justify-content-center">
+              <div class="ff-score-ring">
+                <div class="ff-score-ring-inner">
+                  <div class="ff-score-label">Score</div>
+                  <div id="scoreNumber">–</div>
+                  <div class="ff-score-label">/ 100</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <div class="ff-section-label">Band</div>
+                  <div id="scoreBandText">Run analyzer to classify your week</div>
+                </div>
+                <div>
+                  <div class="ff-section-label">Daily time budget</div>
+                  <div id="scoreBudgetText">–</div>
+                </div>
+              </div>
+
+              <div class="ff-pill-row mt-2">
+                <span class="ff-mini-pill">
+                  <i class="fa-solid fa-moon me-1"></i>
+                  Sleep efficiency: <span id="pillSleep">–</span>
+                </span>
+                <span class="ff-mini-pill">
+                  <i class="fa-solid fa-chair me-1"></i>
+                  Sedentary load: <span id="pillSedentary">–</span>
+                </span>
+                <span class="ff-mini-pill">
+                  <i class="fa-solid fa-person-running me-1"></i>
+                  Activity index: <span id="pillActivity">–</span>
+                </span>
+              </div>
+
+              <div class="mt-2">
+                <div class="ff-section-label">Primary bottlenecks</div>
+                <ul class="ff-list" id="bottleneckList">
+                  <li><i class="fa-regular fa-circle"></i>
+                    <span>No analysis yet.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <hr class="mt-3 mb-2" />
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="ff-section-label">Micro-Habit Plan (sample day)</div>
+              <ul class="ff-list" id="habitPlanList">
+                <li><i class="fa-regular fa-circle"></i>Run analyzer to generate a
+                  plan with 3–10 minute blocks.</li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <div class="ff-section-label">Daily Quick Wins</div>
+              <ul class="ff-list" id="quickWinList">
+                <li><i class="fa-regular fa-circle"></i>
+                  <span>Run the analyzer to unlock fast, actionable suggestions here.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="ff-section-label mt-3">Momentum Metrics</div>
+          <div class="ff-mini-metric-grid">
+            <div class="ff-mini-metric">
+              <span class="ff-mini-label">Weekly Trend</span>
+              <span class="ff-mini-value" id="weeklyTrendText">–</span>
+              <span class="ff-mini-note">Projected using your current score trajectory.</span>
+            </div>
+            <div class="ff-mini-metric">
+              <span class="ff-mini-label">Recovery Balance</span>
+              <span class="ff-mini-value" id="recoveryScoreText">–</span>
+              <span class="ff-mini-note">How sleep, stress, and screen time interact.</span>
+            </div>
+            <div class="ff-mini-metric">
+              <span class="ff-mini-label">Focus Blocks</span>
+              <span class="ff-mini-value" id="focusBlocksText">–</span>
+              <span class="ff-mini-note">Protected pockets you can redirect toward movement.</span>
+            </div>
+            <div class="ff-mini-metric">
+              <span class="ff-mini-label">Screen Wind-Down</span>
+              <span class="ff-mini-value" id="screenHabitText">–</span>
+              <span class="ff-mini-note">Late-night screen load and suggested cutoff.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="ff-ai-card hidden" id="coach">
+          <div class="ff-ai-header">
+            <div>
+              <div class="ff-ai-title">
+                <i class="fa-solid fa-robot"></i> FitAI Coach
+              </div>
+              <div class="ff-card-sub">
+                Time-optimised guidance for busy professionals.
+              </div>
+            </div>
+            <div class="ff-ai-controls">
+              <div class="ff-ai-model">
+                <i class="fa-solid fa-brain me-1"></i> FitAI Core
+              </div>
+              <button
+                type="button"
+                class="ff-ai-min-btn"
+                id="aiCollapseBtn"
+                aria-label="Minimize FitAI"
+              >
+                <i class="fa-solid fa-minus"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="ff-ai-response-wrapper">
+            <div class="ff-ai-response" id="aiResponse"></div>
+          </div>
+
+          <div class="ff-ai-quick">
+            <span class="ff-ai-label">Quick context</span>
+            <div class="ff-ai-quick-buttons">
+              <button type="button" class="ff-ai-chip" id="insertContextBtn" disabled>
+                <i class="fa-solid fa-bolt"></i>
+                <span>Analyzer summary</span>
+              </button>
+              <button type="button" class="ff-ai-chip" id="clearContextBtn" disabled>
+                <i class="fa-solid fa-eraser"></i>
+                <span>Clear context</span>
+              </button>
+              <button type="button" class="ff-ai-chip danger" id="stopResponseBtn" disabled>
+                <i class="fa-solid fa-stop"></i>
+                <span>Stop</span>
+              </button>
+              <button type="button" class="ff-ai-chip neutral" id="resetAiBtn">
+                <i class="fa-solid fa-rotate"></i>
+                <span>Reset</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="ff-ai-body">
+            <div class="ff-ai-section">
+              <label class="ff-ai-label" for="aiContextInput">Context (optional)</label>
+              <textarea
+                class="ff-ai-textarea ff-ai-context"
+                id="aiContextInput"
+                placeholder="Drop constraints, injuries, or key schedule notes here."
+              ></textarea>
+              <div class="ff-ai-hint">Everything in this box is appended to each FitAI request.</div>
+            </div>
+            <div class="ff-ai-section ff-ai-question-wrap">
+              <label class="ff-ai-label" for="aiPrompt">Ask FitAI</label>
+              <div class="ff-ai-input-row">
+                <textarea
+                  class="ff-ai-textarea ff-ai-question"
+                  id="aiPrompt"
+                  placeholder="Ask FitAI how to stay on track during a 60-hour workweek..."
+                ></textarea>
+                <button
+                  class="ff-ai-send-btn"
+                  type="button"
+                  id="aiAskBtn"
+                  disabled
+                >
+                  <i class="fa-solid fa-paper-plane"></i>
+                  <span>Send</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="ff-ai-status-row">
+            <div class="ff-status" id="aiStatus">
+              <span class="ff-status-dot"></span>
+              <span>Waiting for secure setup</span>
+            </div>
+          </div>
+        </section>
+        <button
+          type="button"
+          class="ff-ai-launcher show"
+          id="aiLauncherBtn"
+          aria-label="Open FitAI Coach"
+        >
+          <i class="fa-solid fa-robot"></i> FitAI Coach
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Pyodide -->
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+
+  <script>
+    // ========= CONFIG: ENCRYPTED OPENAI KEY (from your Python helper) =========
+    // After running your helper:
+    //   encrypted_openai = encrypt_key(openai_key, passphrase)
+    // paste here:
+    const OPENAI_KEY_ENCRYPTED = "cOw7g0W4eGXznpOpZzSoOFmOIm04p+lSkou0OhHs9D1LxWarB5lzePb5ss9QHLpgM5w9TQu9xmagjqUtGv/+BG3lXsJgk1oA8orawWIylTpUvw81L6jveoKPlCtUy8AmbekhmX3uIhrCkZrZExCBemLlCXNY87VUh5e/NBfo0DtM/nzHYbxQfOD5h8dKL5ZPVr03dgup2HPxj5IBC/f1BjLgIrI="; // e.g. "Q3h2...=="
+    const OPENAI_PASSPHRASE = "default_salt_2024"; // change if you used custom
+
+    // ========= XOR + SHA256 + base64 DECRYPTION (matches your Python helper) =========
+    function base64ToBytes(b64) {
+      const bin = atob(b64);
+      const bytes = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) {
+        bytes[i] = bin.charCodeAt(i);
+      }
+      return bytes;
+    }
+
+    async function decryptOpenAIKey() {
+      if (!OPENAI_KEY_ENCRYPTED) {
+        throw new Error("No encrypted OpenAI key configured.");
+      }
+      const encBytes = base64ToBytes(OPENAI_KEY_ENCRYPTED);
+      const encoder = new TextEncoder();
+      const passBytes = encoder.encode(OPENAI_PASSPHRASE);
+      const hashBuf = await crypto.subtle.digest("SHA-256", passBytes);
+      const hash = new Uint8Array(hashBuf);
+      const out = new Uint8Array(encBytes.length);
+      for (let i = 0; i < encBytes.length; i++) {
+        out[i] = encBytes[i] ^ hash[i % hash.length];
+      }
+      const decoder = new TextDecoder();
+      return decoder.decode(out);
+    }
+
+    // ========= Pyodide SETUP & PYTHON ANALYTICS =========
+    let pyodideReadyPromise = null;
+    let lastAnalyticsText = "";
+    let typingInterval = null;
+    let isStreaming = false;
+    let currentAbortController = null;
+
+    const contextInput = document.getElementById("aiContextInput");
+    const promptInput = document.getElementById("aiPrompt");
+    const insertContextBtn = document.getElementById("insertContextBtn");
+    const clearContextBtn = document.getElementById("clearContextBtn");
+    const stopResponseBtn = document.getElementById("stopResponseBtn");
+    const resetAiBtn = document.getElementById("resetAiBtn");
+    const askBtnEl = document.getElementById("aiAskBtn");
+    const aiCard = document.getElementById("coach");
+    const collapseBtn = document.getElementById("aiCollapseBtn");
+    const launcherBtn = document.getElementById("aiLauncherBtn");
+
+    function syncContextButtons() {
+      if (clearContextBtn && contextInput) {
+        const hasContext = Boolean(contextInput.value.trim());
+        clearContextBtn.disabled = !hasContext;
+      }
+      if (stopResponseBtn) {
+        const hasActive = isStreaming || currentAbortController !== null;
+        stopResponseBtn.disabled = !hasActive;
+      }
+    }
+
+    if (contextInput) {
+      contextInput.addEventListener("input", () => {
+        syncContextButtons();
+      });
+    }
+
+    if (insertContextBtn && contextInput) {
+      insertContextBtn.addEventListener("click", () => {
+        if (!lastAnalyticsText) return;
+        contextInput.value = lastAnalyticsText;
+        contextInput.focus();
+        syncContextButtons();
+      });
+    }
+
+    if (clearContextBtn && contextInput) {
+      clearContextBtn.addEventListener("click", () => {
+        contextInput.value = "";
+        contextInput.focus();
+        syncContextButtons();
+      });
+    }
+
+    if (stopResponseBtn) {
+      stopResponseBtn.addEventListener("click", () => {
+        const respEl = document.getElementById("aiResponse");
+        const statusEl = document.getElementById("aiStatus");
+        if (currentAbortController) {
+          currentAbortController.abort();
+          currentAbortController = null;
+        }
+        if (respEl) {
+          stopStreaming(respEl);
+          if (!respEl.textContent.trim()) {
+            respEl.textContent = "Response stopped.";
+          }
+        }
+        if (statusEl) {
+          statusEl.innerHTML =
+            '<span class="ff-status-dot err"></span><span>Response stopped.</span>';
+        }
+        syncContextButtons();
+      });
+    }
+
+    if (resetAiBtn) {
+      resetAiBtn.addEventListener("click", () => {
+        const respEl = document.getElementById("aiResponse");
+        const statusEl = document.getElementById("aiStatus");
+        if (currentAbortController) {
+          currentAbortController.abort();
+          currentAbortController = null;
+        }
+        stopStreaming(respEl);
+        if (respEl) {
+          respEl.textContent = "";
+        }
+        if (promptInput) {
+          promptInput.value = "";
+        }
+        if (contextInput) {
+          contextInput.value = "";
+        }
+        syncContextButtons();
+        if (statusEl) {
+          statusEl.innerHTML =
+            '<span class="ff-status-dot"></span><span>Session reset. Ready when you are.</span>';
+        }
+      });
+    }
+
+    syncContextButtons();
+
+    const PYTHON_CODE = `
+import json
+
+def _safe_float(val, default=0.0):
+    try:
+        if val is None:
+            return default
+        if isinstance(val, (int, float)):
+            return float(val)
+        s = str(val).strip()
+        if s == "":
+            return default
+        return float(s)
+    except Exception:
+        return default
+
+def analyze_fitness(form_data):
+    # form_data is a JS object converted to Python dict
+    age = _safe_float(form_data.get("age"), 35)
+    bmi = _safe_float(form_data.get("bmi"), 27)
+    work_hours = _safe_float(form_data.get("work_hours"), 9)
+    commute_minutes = _safe_float(form_data.get("commute_minutes"), 60)
+    sitting_hours = _safe_float(form_data.get("sitting_hours"), 9)
+    weekly_workouts = _safe_float(form_data.get("weekly_workouts"), 2)
+    avg_sleep = _safe_float(form_data.get("avg_sleep"), 6.5)
+    stress_level = _safe_float(form_data.get("stress_level"), 3)
+    late_screen = _safe_float(form_data.get("late_screen"), 2)
+    free_blocks = _safe_float(form_data.get("free_blocks"), 2)
+
+    # ---- Time & Load Model ----
+    time_load = (work_hours + commute_minutes / 60.0 + sitting_hours / 3.0) / 24.0
+    time_load = max(0.0, min(1.6, time_load))
+
+    recovery = (avg_sleep / 8.0) - (stress_level - 3.0) * 0.1 - (late_screen * 0.05)
+    recovery = max(-0.5, min(1.2, recovery))
+
+    activity = weekly_workouts / 5.0
+    activity = max(0.0, min(1.5, activity))
+
+    # Key weighting: heavy penalty for overload + poor recovery
+    score_raw = 0.45 * (1.0 - min(time_load, 1.2)) + 0.35 * recovery + 0.20 * activity
+
+    # Additional penalty for very low free blocks
+    if free_blocks <= 1:
+        score_raw -= 0.15
+    elif free_blocks <= 2:
+        score_raw -= 0.05
+    else:
+        score_raw += 0.05
+
+    score_norm = max(0.0, min(1.0, (score_raw + 0.5) / 1.5))
+    score = round(score_norm * 100)
+
+    # Time budget: how many minutes/day of realistic habit time
+    base_budget = 35.0
+    budget = base_budget + (free_blocks * 5.0) - max(0.0, (time_load - 1.0)) * 30.0
+    budget = max(10.0, min(60.0, budget))
+
+    # Bands
+    if score < 35:
+        band = "Overloaded"
+        band_desc = "Your current workday is crushing your recovery. We start with energy protection, not PRs."
+        band_tag = "overloaded"
+    elif score < 55:
+        band = "Tight but workable"
+        band_desc = "You are stretched, but there is room for 15–30 min of structured micro-habits."
+        band_tag = "tight"
+    elif score < 75:
+        band = "Sustainable"
+        band_desc = "Your balance is decent. We can ramp intensity while protecting sleep and joints."
+        band_tag = "sustainable"
+    else:
+        band = "Thriving"
+        band_desc = "You are in a strong position. We can program progressive overload and performance blocks."
+        band_tag = "thriving"
+
+    # Sleep, sedentary & activity sub-scores
+    sleep_eff = max(0.0, min(1.0, (avg_sleep - 5.0) / 3.0))  # 5–8 hrs
+    sedentary = max(0.0, min(1.5, sitting_hours / 8.0))
+    sedentary_load = max(0.0, min(1.0, sedentary / 1.2))
+    activity_idx = max(0.0, min(1.2, weekly_workouts / 4.0))
+
+    # Bottlenecks
+    bottlenecks = []
+    if avg_sleep < 7:
+        bottlenecks.append("Sleep debt – target +30 to +60 min earlier shutdown.")
+    if late_screen >= 2:
+        bottlenecks.append("High late-night screen exposure – blue light reduction before bed.")
+    if sitting_hours >= 8:
+        bottlenecks.append("Long sitting window – insert 3-minute mobility every 45–60 min.")
+    if weekly_workouts <= 2:
+        bottlenecks.append("Low structured movement – start with 2 × 20-min week-day blocks.")
+    if free_blocks <= 1:
+        bottlenecks.append("Almost zero controllable time blocks – must protect at least one 15-min slot.")
+    if not bottlenecks:
+        bottlenecks.append("No single severe bottleneck detected – focus on consistency and progression.")
+
+    # Micro-habit schedule (dummy but logical)
+    plan = []
+
+    if free_blocks <= 1:
+        plan.append("During commute: 3 × 60-second calf raises + seated core breathing.")
+        plan.append("At desk: once every hour, 20 chair squats or wall push-ups (3 minutes).")
+        plan.append("Before bed: 5-minute mobility + phone out of bedroom.")
+    elif free_blocks <= 3:
+        plan.append("Morning (10–15 min): 5-min brisk walk + 10-min bodyweight circuit.")
+        plan.append("Mid-day (5–10 min): walking meeting or corridor steps, minimum 800–1,000 steps.")
+        plan.append("Evening (10–15 min): light strength + stretch or low-intensity walk.")
+    else:
+        plan.append("Morning (20 min): structured strength (push, pull, legs) + warm-up.")
+        plan.append("Mid-day (10 min): brisk walk + mobility break.")
+        plan.append("Evening (15–20 min): mix of conditioning (interval walk) + static stretching.")
+
+    # Dummy weekly pattern (for potential graphs later)
+    weekly_pattern = [round(score * (0.9 + i * 0.02), 1) for i in range(7)]
+
+    debug = {
+        "time_load": round(time_load, 3),
+        "recovery": round(recovery, 3),
+        "activity": round(activity, 3),
+        "sleep_eff": round(sleep_eff, 3),
+        "sedentary_load": round(sedentary_load, 3),
+        "activity_idx": round(activity_idx, 3),
+        "weekly_pattern": weekly_pattern,
+        "inputs": form_data,
+    }
+
+    result = {
+        "score": score,
+        "score_norm": round(score_norm, 3),
+        "band": band,
+        "band_desc": band_desc,
+        "band_tag": band_tag,
+        "daily_budget": int(round(budget)),
+        "sleep_eff": round(sleep_eff * 100),
+        "sedentary_load": round(sedentary_load * 100),
+        "activity_idx": round(min(activity_idx, 1.0) * 100),
+        "bottlenecks": bottlenecks,
+        "plan": plan,
+        "debug": debug,
+    }
+    return json.dumps(result)
+`;
+
+    function stopStreaming(el) {
+      if (typingInterval) {
+        clearTimeout(typingInterval);
+        typingInterval = null;
+      }
+      if (el) {
+        el.classList.remove("typing");
+      }
+      isStreaming = false;
+      syncContextButtons();
+    }
+
+    function streamText(el, text) {
+      if (!el) return;
+      const fullText = text || "";
+      stopStreaming(el);
+      el.textContent = "";
+      if (!fullText) {
+        return;
+      }
+
+      el.classList.add("typing");
+      isStreaming = true;
+      syncContextButtons();
+
+      let idx = 0;
+      const step = fullText.length > 600 ? 3 : 2;
+
+      const typeNext = () => {
+        idx = Math.min(fullText.length, idx + step);
+        el.textContent = fullText.slice(0, idx);
+        if (idx >= fullText.length) {
+          stopStreaming(el);
+          return;
+        }
+        const currentChar = fullText[Math.max(0, idx - 1)];
+        let delay = 14 + Math.random() * 14;
+        if (currentChar === "." || currentChar === "!" || currentChar === "?") {
+          delay = 70;
+        } else if (currentChar === "," || currentChar === ";" || currentChar === ":") {
+          delay = 45;
+        }
+        typingInterval = setTimeout(typeNext, delay);
+      };
+
+      typingInterval = setTimeout(typeNext, 35);
+    }
+
+    function collapseFitAI() {
+      if (aiCard) {
+        aiCard.classList.add("hidden");
+      }
+      if (launcherBtn) {
+        launcherBtn.classList.add("show");
+      }
+    }
+
+    function expandFitAI() {
+      if (aiCard) {
+        aiCard.classList.remove("hidden");
+      }
+      if (launcherBtn) {
+        launcherBtn.classList.remove("show");
+      }
+    }
+
+    async function initPyodideAndCode() {
+      const statusEl = document.getElementById("pyodideStatus");
+      try {
+        statusEl.textContent = "Preparing your analysis…";
+        const pyodide = await loadPyodide();
+        await pyodide.runPythonAsync(PYTHON_CODE);
+        window._pyodide = pyodide;
+        statusEl.innerHTML =
+          '<span style="color:#4ade80;"><i class="fa-solid fa-circle-check me-1"></i>Analysis ready</span>';
+        document.getElementById("runAnalysisBtn").disabled = false;
+      } catch (e) {
+        console.error(e);
+        statusEl.innerHTML =
+          '<span style="color:#f87171;"><i class="fa-solid fa-triangle-exclamation me-1"></i>Analysis could not load</span>';
+      }
+    }
+
+    pyodideReadyPromise = initPyodideAndCode();
+
+    // ========= ANALYZER HANDLER =========
+    function getStressLabel(v) {
+      const x = Number(v);
+      if (x <= 1) return "Very low";
+      if (x === 2) return "Low";
+      if (x === 3) return "Moderate";
+      if (x === 4) return "High";
+      return "Very high";
+    }
+
+    document.getElementById("stress_level").addEventListener("input", (e) => {
+      document.getElementById("stressLabel").textContent = getStressLabel(
+        e.target.value
+      );
+    });
+
+    document
+      .getElementById("runAnalysisBtn")
+      .addEventListener("click", async () => {
+        const btn = document.getElementById("runAnalysisBtn");
+        const statusEl = document.getElementById("pyodideStatus");
+        btn.disabled = true;
+        btn.innerHTML =
+          '<i class="fa-solid fa-circle-notch fa-spin me-1"></i> Running…';
+
+        const formData = {
+          age: document.getElementById("age").value,
+          bmi: document.getElementById("bmi").value,
+          work_hours: document.getElementById("work_hours").value,
+          commute_minutes: document.getElementById("commute_minutes").value,
+          sitting_hours: document.getElementById("sitting_hours").value,
+          weekly_workouts: document.getElementById("weekly_workouts").value,
+          avg_sleep: document.getElementById("avg_sleep").value,
+          stress_level: document.getElementById("stress_level").value,
+          late_screen: document.getElementById("late_screen").value,
+          free_blocks: document.getElementById("free_blocks").value,
+        };
+
+        let analyzerFn = null;
+        let pyFormData = null;
+        try {
+          await pyodideReadyPromise;
+          const pyodide = window._pyodide;
+          analyzerFn = pyodide.globals.get("analyze_fitness");
+          pyFormData = pyodide.toPy(formData);
+          const jsonRes = analyzerFn(pyFormData);
+          const res = JSON.parse(jsonRes);
+          updateUIWithResults(res);
+          statusEl.textContent =
+            "Analysis complete. You can tweak inputs & rerun.";
+          btn.innerHTML =
+            '<i class="fa-solid fa-rotate me-1"></i> Run again';
+        } catch (err) {
+          console.error(err);
+          statusEl.innerHTML =
+            '<span style="color:#f87171;"><i class="fa-solid fa-triangle-exclamation me-1"></i>Analysis error</span>';
+          btn.innerHTML =
+            '<i class="fa-solid fa-rotate me-1"></i> Try again';
+        } finally {
+          btn.disabled = false;
+          if (pyFormData && typeof pyFormData.destroy === "function") {
+            pyFormData.destroy();
+          }
+          if (analyzerFn && typeof analyzerFn.destroy === "function") {
+            analyzerFn.destroy();
+          }
+        }
+      });
+
+    function updateUIWithResults(res) {
+      // Score & band
+      document.getElementById("scoreNumber").textContent = res.score ?? "–";
+
+      let bandClass = "ff-chip-band";
+      if (res.band_tag === "overloaded") bandClass += " ff-chip-overloaded";
+      else if (res.band_tag === "tight") bandClass += " ff-chip-tight";
+      else if (res.band_tag === "sustainable")
+        bandClass += " ff-chip-sustainable";
+      else if (res.band_tag === "thriving") bandClass += " ff-chip-thriving";
+
+      document.getElementById("scoreBandText").innerHTML =
+        `<span class="${bandClass}">${res.band}</span> – ${res.band_desc}`;
+
+      document.getElementById(
+        "scoreBudgetText"
+      ).textContent = `${res.daily_budget} min / day realistic fitness budget`;
+
+      document.getElementById("pillSleep").textContent =
+        res.sleep_eff + "%";
+      document.getElementById("pillSedentary").textContent =
+        res.sedentary_load + "%";
+      document.getElementById("pillActivity").textContent =
+        res.activity_idx + "%";
+
+      // Bottlenecks
+      const bottleneckList = document.getElementById("bottleneckList");
+      bottleneckList.innerHTML = "";
+      (res.bottlenecks || []).forEach((b) => {
+        const li = document.createElement("li");
+        li.innerHTML =
+          '<i class="fa-solid fa-circle-exclamation"></i><span>' +
+          b +
+          "</span>";
+        bottleneckList.appendChild(li);
+      });
+
+      // Plan
+      const habitPlanList = document.getElementById("habitPlanList");
+      habitPlanList.innerHTML = "";
+      (res.plan || []).forEach((p) => {
+        const li = document.createElement("li");
+        li.innerHTML =
+          '<i class="fa-solid fa-stopwatch"></i><span>' + p + "</span>";
+        habitPlanList.appendChild(li);
+      });
+
+      const debug = res.debug || {};
+      const inputs = debug.inputs || {};
+
+      // Quick wins
+      const quickWins = [];
+      if ((res.sleep_eff || 0) < 70) {
+        quickWins.push(
+          "Add a 45-minute wind-down twice this week to lift sleep efficiency."
+        );
+      } else {
+        quickWins.push(
+          "Keep your 30-minute phone-free wind-down to protect current sleep gains."
+        );
+      }
+
+      if ((res.sedentary_load || 0) > 60) {
+        quickWins.push(
+          "Drop in three 2-minute stand-and-flow breaks during the longest sitting block."
+        );
+      } else if (quickWins.length < 3) {
+        quickWins.push(
+          "Pair each meeting wrap-up with a 90-second posture reset to stay mobile."
+        );
+      }
+
+      if ((res.activity_idx || 0) < 55) {
+        quickWins.push(
+          "Stack a 12-minute brisk walk onto two workdays to raise movement volume."
+        );
+      } else if (quickWins.length < 4) {
+        quickWins.push(
+          "Add one progressive interval walk (10 minutes) this week to keep momentum."
+        );
+      }
+
+      const freeBlocksVal = Number(inputs.free_blocks ?? NaN);
+      if (!Number.isNaN(freeBlocksVal) && freeBlocksVal < 2) {
+        quickWins.push(
+          "Protect a 15-minute slot after lunch by blocking it on your calendar."
+        );
+      }
+
+      const lateScreenVal = Number(inputs.late_screen ?? NaN);
+      if (
+        !Number.isNaN(lateScreenVal) &&
+        lateScreenVal > 1.5 &&
+        quickWins.length < 4
+      ) {
+        quickWins.push(
+          "Shift screens off 45 minutes before bed and swap in light mobility."
+        );
+      }
+
+      let renderedQuickWins = quickWins.filter(Boolean);
+      if (!renderedQuickWins.length) {
+        renderedQuickWins = [
+          "You're balanced—clone this schedule for the next three workdays to lock in consistency.",
+        ];
+      }
+      renderedQuickWins = renderedQuickWins.slice(0, 4);
+
+      const quickWinList = document.getElementById("quickWinList");
+      if (quickWinList) {
+        quickWinList.innerHTML = "";
+        renderedQuickWins.forEach((tip) => {
+          const li = document.createElement("li");
+          li.innerHTML =
+            '<i class="fa-solid fa-bolt"></i><span>' + tip + "</span>";
+          quickWinList.appendChild(li);
+        });
+      }
+
+      // Momentum metrics
+      const weeklyPattern = Array.isArray(debug.weekly_pattern)
+        ? debug.weekly_pattern
+        : [];
+      let weeklyTrendValue = "–";
+      if (weeklyPattern.length >= 2) {
+        const diff = weeklyPattern[weeklyPattern.length - 1] - weeklyPattern[0];
+        if (Math.abs(diff) < 1) {
+          weeklyTrendValue = `Stable (${weeklyPattern[0].toFixed(0)} → ${weeklyPattern[
+            weeklyPattern.length - 1
+          ].toFixed(0)})`;
+        } else if (diff > 0) {
+          weeklyTrendValue = `Improving (+${diff.toFixed(1)} pts)`;
+        } else {
+          weeklyTrendValue = `Sliding (${diff.toFixed(1)} pts)`;
+        }
+      } else if (weeklyPattern.length === 1) {
+        weeklyTrendValue = `Holding @ ${weeklyPattern[0].toFixed(0)}`;
+      }
+
+      const recoveryVal =
+        typeof debug.recovery === "number" ? debug.recovery : null;
+      let recoverySummary = "–";
+      if (recoveryVal !== null) {
+        if (recoveryVal >= 0.4) {
+          recoverySummary = `High recharge (+${recoveryVal.toFixed(2)})`;
+        } else if (recoveryVal >= 0.15) {
+          recoverySummary = `Balanced (+${recoveryVal.toFixed(2)})`;
+        } else if (recoveryVal >= -0.1) {
+          recoverySummary = `${recoveryVal >= 0 ? "+" : ""}${recoveryVal.toFixed(
+            2
+          )} • add decompression`;
+        } else {
+          recoverySummary = `${recoveryVal.toFixed(2)} • priority reset`;
+        }
+      }
+
+      let focusSummary = "–";
+      if (!Number.isNaN(freeBlocksVal)) {
+        if (freeBlocksVal >= 3) {
+          focusSummary = `${freeBlocksVal} slots ready`;
+        } else if (freeBlocksVal >= 1) {
+          focusSummary = `${freeBlocksVal} slot • guard it`;
+        } else {
+          focusSummary = "Create one micro-slot";
+        }
+      }
+
+      let screenSummary = "–";
+      if (!Number.isNaN(lateScreenVal)) {
+        if (lateScreenVal <= 1) {
+          screenSummary = "Low (≤1 hr)";
+        } else if (lateScreenVal <= 2.5) {
+          screenSummary = `${lateScreenVal.toFixed(
+            1
+          )} hrs • trim 30–45 min`;
+        } else {
+          screenSummary = `${lateScreenVal.toFixed(
+            1
+          )} hrs • cut 1 hr pre-bed`;
+        }
+      }
+
+      const weeklyTrendEl = document.getElementById("weeklyTrendText");
+      if (weeklyTrendEl) {
+        weeklyTrendEl.textContent = weeklyTrendValue;
+      }
+
+      const recoveryScoreEl = document.getElementById("recoveryScoreText");
+      if (recoveryScoreEl) {
+        recoveryScoreEl.textContent = recoverySummary;
+      }
+
+      const focusBlocksEl = document.getElementById("focusBlocksText");
+      if (focusBlocksEl) {
+        focusBlocksEl.textContent = focusSummary;
+      }
+
+      const screenHabitEl = document.getElementById("screenHabitText");
+      if (screenHabitEl) {
+        screenHabitEl.textContent = screenSummary;
+      }
+
+      // Hero metrics
+      document.getElementById("heroTimeBudget").textContent =
+        res.daily_budget + " min";
+      document.getElementById("heroIndex").textContent = res.score;
+      document.getElementById("heroIndexLabel").textContent = res.band;
+      document.getElementById("heroHabits").textContent = (res.plan || []).length;
+
+      // Band badge
+      const bandBadge = document.getElementById("bandBadge");
+      bandBadge.innerHTML =
+        '<i class="fa-solid fa-hourglass-half me-1"></i>' + res.band;
+
+      // Prepare analytics context text for FitAI
+      const bottleneckSummary = (res.bottlenecks || []).length
+        ? (res.bottlenecks || []).join("; ")
+        : "No severe bottlenecks detected";
+      const planSummary = (res.plan || []).length
+        ? (res.plan || []).join(" | ")
+        : "No plan generated";
+
+      const contextPieces = [
+        `Time-Crunch Fitness Score: ${res.score}/100 (${res.band}).`,
+        `Daily realistic time budget: ${res.daily_budget} minutes.`,
+        `Sleep efficiency: ${res.sleep_eff}%.`,
+        `Sedentary load: ${res.sedentary_load}%.`,
+        `Activity index: ${res.activity_idx}%.`,
+        `Key bottlenecks: ${bottleneckSummary}.`,
+        `Micro-habit plan: ${planSummary}.`,
+        `Weekly trend: ${weeklyTrendValue}.`,
+        `Recovery balance: ${recoverySummary}.`,
+        `Focus blocks: ${focusSummary}.`,
+        `Screen wind-down: ${screenSummary}.`,
+      ];
+
+      if (renderedQuickWins.length) {
+        contextPieces.push(`Quick wins: ${renderedQuickWins.join(" | ")}.`);
+      }
+
+      lastAnalyticsText = contextPieces.join(" ");
+      if (insertContextBtn) {
+        const hasContext = Boolean(lastAnalyticsText);
+        insertContextBtn.disabled = !hasContext;
+        insertContextBtn.classList.toggle("ready", hasContext);
+      }
+      syncContextButtons();
+    }
+
+    if (collapseBtn) {
+      collapseBtn.addEventListener("click", () => {
+        collapseFitAI();
+      });
+    }
+
+    if (launcherBtn) {
+      launcherBtn.addEventListener("click", () => {
+        expandFitAI();
+        if (promptInput) {
+          promptInput.focus();
+        } else if (contextInput) {
+          contextInput.focus();
+        }
+      });
+    }
+
+    // ========= FITAI COACH (Secure API) =========
+    async function initOpenAIStatus() {
+      const statusEl = document.getElementById("aiStatus");
+      if (!askBtnEl || !statusEl) {
+        return;
+      }
+      if (!OPENAI_KEY_ENCRYPTED) {
+        statusEl.innerHTML =
+          '<span class="ff-status-dot err"></span><span>Secure setup incomplete. Add your access code to continue.</span>';
+        askBtnEl.disabled = true;
+        return;
+      }
+      statusEl.innerHTML =
+        '<span class="ff-status-dot"></span><span>Secure channel ready.</span>';
+      askBtnEl.disabled = false;
+    }
+
+    initOpenAIStatus();
+    if (askBtnEl) {
+      askBtnEl.addEventListener("click", async () => {
+        const respEl = document.getElementById("aiResponse");
+        const statusEl = document.getElementById("aiStatus");
+        const btn = askBtnEl;
+        if (!respEl || !statusEl) {
+          return;
+        }
+        const extraContext = contextInput ? contextInput.value.trim() : "";
+        const userPrompt = (promptInput ? promptInput.value : "").trim();
+
+        if (!promptInput) {
+          respEl.textContent = "Prompt input missing in DOM.";
+          return;
+        }
+
+        if (!userPrompt) {
+          respEl.textContent = "Please type a question or scenario for FitAI.";
+          return;
+        }
+
+        btn.disabled = true;
+        btn.innerHTML =
+          '<i class="fa-solid fa-circle-notch fa-spin"></i><span>Thinking…</span>';
+        statusEl.innerHTML =
+          '<span class="ff-status-dot"></span><span>Connecting to FitAI…</span>';
+        stopStreaming(respEl);
+        respEl.textContent = "";
+        respEl.classList.add("typing");
+
+        if (currentAbortController) {
+          currentAbortController.abort();
+        }
+        currentAbortController = new AbortController();
+        syncContextButtons();
+
+        try {
+          const apiKey = await decryptOpenAIKey();
+          const messages = [
+            {
+              role: "system",
+              content:
+                "You are a fitness coach specialized in time-crunched working professionals in India. " +
+                "You must design ultra-practical plans that fit into 3–20 minute blocks, focusing on energy, blood sugar, and long-term sustainability. " +
+                "Be specific, numeric when useful, and avoid extremes. Assume user has limited equipment and may work hybrid/office jobs.",
+            },
+          ];
+
+          if (lastAnalyticsText) {
+            messages.push({
+              role: "system",
+              content: "Fitness analytics context: " + lastAnalyticsText,
+            });
+          }
+
+          if (extraContext) {
+            messages.push({
+              role: "system",
+              content: "Additional user-supplied context: " + extraContext,
+            });
+          }
+
+          messages.push({
+            role: "user",
+            content: userPrompt,
+          });
+
+          const res = await fetch("https://api.openai.com/v1/chat/completions", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + apiKey,
+            },
+            body: JSON.stringify({
+              model: "gpt-4.1",
+              messages,
+              temperature: 0.4,
+              max_tokens: 500,
+            }),
+            signal: currentAbortController.signal,
+          });
+
+          if (!res.ok) {
+            const text = await res.text();
+            throw new Error("FitAI service error: " + text);
+          }
+
+          const data = await res.json();
+          const answer = data.choices?.[0]?.message?.content || "(No response)";
+          streamText(respEl, answer);
+          statusEl.innerHTML =
+            '<span class="ff-status-dot ok"></span><span>Response received from FitAI.</span>';
+        } catch (err) {
+          console.error(err);
+          stopStreaming(respEl);
+          if (err.name === "AbortError") {
+            respEl.textContent = "Response stopped.";
+            statusEl.innerHTML =
+              '<span class="ff-status-dot err"></span><span>Response stopped.</span>';
+          } else {
+            respEl.textContent =
+              "We couldn't reach FitAI. Please verify your setup and try again.";
+            statusEl.innerHTML =
+              '<span class="ff-status-dot err"></span><span>FitAI connection error – check your setup.</span>';
+          }
+        } finally {
+          if (currentAbortController) {
+            currentAbortController = null;
+          }
+          btn.disabled = false;
+          btn.innerHTML =
+            '<i class="fa-solid fa-paper-plane"></i><span>Send</span>';
+          syncContextButtons();
+        }
+      });
+    }
+
+    collapseFitAI();
+  </script>
+</body>
+</html>
