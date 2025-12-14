@@ -295,6 +295,7 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
+      gap: 14px;
     }
 
     .ff-card-title {
@@ -312,6 +313,12 @@
       color: var(--ff-muted);
     }
 
+    .ff-card-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .ff-badge-soft {
       border-radius: 999px;
       border: 1px solid rgba(148, 163, 184, 0.45);
@@ -321,6 +328,40 @@
       display: inline-flex;
       align-items: center;
       gap: 5px;
+    }
+
+    .ff-share-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(34, 197, 94, 0.16);
+      color: #bbf7d0;
+      transition: filter 0.2s ease, background 0.2s ease, color 0.2s ease;
+      box-shadow: 0 10px 26px rgba(34, 197, 94, 0.18);
+    }
+
+    .ff-share-btn i {
+      font-size: 14px;
+    }
+
+    .ff-share-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      box-shadow: none;
+      background: rgba(71, 85, 105, 0.5);
+      color: rgba(203, 213, 225, 0.8);
+    }
+
+    .ff-share-btn:not(:disabled):hover {
+      filter: brightness(1.05);
+      background: rgba(34, 197, 94, 0.24);
+      color: #ecfdf5;
     }
 
     .ff-form-label {
@@ -576,6 +617,25 @@
       gap: 8px;
     }
 
+    .ff-ai-reset {
+      border: none;
+      border-radius: 999px;
+      background: rgba(59, 130, 246, 0.16);
+      color: #bfdbfe;
+      font-size: 12px;
+      letter-spacing: 0.03em;
+      padding: 6px 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: filter 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .ff-ai-reset:hover {
+      background: rgba(59, 130, 246, 0.28);
+      color: #e0f2fe;
+    }
+
     .ff-ai-title {
       font-size: 13px;
       text-transform: uppercase;
@@ -642,18 +702,6 @@
       }
     }
 
-    .ff-ai-body {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .ff-ai-section {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
     .ff-ai-label {
       font-size: 11px;
       text-transform: uppercase;
@@ -662,18 +710,22 @@
     }
 
     .ff-ai-chip {
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.55);
-      background: rgba(15, 23, 42, 0.65);
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background: rgba(15, 23, 42, 0.58);
       color: #e2e8f0;
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 8px 16px;
+      font-size: 12px;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      padding: 8px 14px;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: border 0.2s ease, color 0.2s ease, background 0.2s ease;
+      transition:
+        border 0.2s ease,
+        color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
     }
 
     .ff-ai-chip i {
@@ -690,22 +742,12 @@
       color: var(--ff-accent);
     }
 
-    .ff-ai-chip.ready:not(:disabled) {
-      background: rgba(34, 197, 94, 0.12);
-      border-color: rgba(34, 197, 94, 0.55);
+    .ff-ai-chip.ready:not(:disabled),
+    .ff-ai-chip.active:not(:disabled) {
+      background: rgba(34, 197, 94, 0.14);
+      border-color: rgba(34, 197, 94, 0.6);
       color: #34d399;
-    }
-
-    .ff-ai-chip.danger:not(:disabled) {
-      background: rgba(220, 38, 38, 0.15);
-      border-color: rgba(248, 113, 113, 0.55);
-      color: #f87171;
-    }
-
-    .ff-ai-chip.neutral:not(:disabled) {
-      background: rgba(59, 130, 246, 0.12);
-      border-color: rgba(96, 165, 250, 0.55);
-      color: #93c5fd;
+      box-shadow: 0 12px 28px rgba(15, 118, 110, 0.2);
     }
 
     .ff-ai-textarea {
@@ -733,8 +775,8 @@
     }
 
     .ff-ai-textarea.ff-ai-question {
-      min-height: 120px;
-      max-height: 240px;
+      min-height: 64px;
+      max-height: 140px;
     }
 
     .ff-ai-hint {
@@ -743,81 +785,78 @@
       letter-spacing: 0.03em;
     }
 
-    .ff-ai-response-wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      position: relative;
-    }
-
-    .ff-ai-response {
-      font-size: 13px;
-      line-height: 1.62;
-      background:
-        linear-gradient(170deg, rgba(30, 41, 59, 0.92), rgba(15, 23, 42, 0.96));
-      border-radius: 18px;
-      border: 1px solid rgba(71, 85, 105, 0.9);
-      padding: 16px 18px;
-      max-height: 260px;
+    .ff-ai-chat {
+      background: rgba(15, 23, 42, 0.78);
+      border-radius: 20px;
+      border: 1px solid rgba(71, 85, 105, 0.75);
+      padding: 18px;
+      min-height: 220px;
+      height: clamp(220px, 34vh, 340px);
+      max-height: 340px;
       overflow-y: auto;
-      position: relative;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-      transition: box-shadow 0.2s ease;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      margin-top: 18px;
     }
 
-    .ff-chat-user-msg {
-      align-self: flex-end;
-      background: linear-gradient(135deg, #3b82f6, #2563eb);
-      color: #fff;
-      padding: 10px 14px;
-      border-radius: 18px 18px 4px 18px;
-      max-width: 75%;
-      word-wrap: break-word;
-      white-space: pre-wrap;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      font-size: 13px;
-      line-height: 1.5;
+    .ff-ai-chat::-webkit-scrollbar {
+      width: 6px;
     }
 
-    .ff-chat-assistant-msg {
-      align-self: flex-start;
-      background: linear-gradient(135deg, rgba(51, 65, 85, 0.95), rgba(30, 41, 59, 0.98));
-      color: rgba(226, 232, 240, 0.96);
-      padding: 10px 14px;
-      border-radius: 18px 18px 18px 4px;
-      max-width: 85%;
-      word-wrap: break-word;
-      white-space: pre-wrap;
-      border: 1px solid rgba(71, 85, 105, 0.6);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-      font-size: 13px;
-      line-height: 1.62;
+    .ff-ai-chat::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.35);
+      border-radius: 999px;
     }
 
-    .ff-ai-response:empty {
+    .ff-ai-empty {
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
       color: rgba(226, 232, 240, 0.7);
+      font-size: 13px;
+      line-height: 1.6;
+      padding: 12px 6px;
     }
 
-    .ff-ai-response:empty::before {
-      content: "⚡ Welcome to FitAI. Ask about habits, recovery, or time-saving routines.";
-      max-width: 260px;
-      line-height: 1.5;
+    .ff-ai-message {
+      display: flex;
+      gap: 10px;
     }
 
-    .ff-ai-response.typing {
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.04),
-        0 0 0 1px rgba(34, 197, 94, 0.25);
+    .ff-ai-message.ff-ai-user {
+      justify-content: flex-end;
     }
 
-    .ff-ai-response.typing::after {
+    .ff-ai-msg-body {
+      max-width: 80%;
+      border-radius: 16px;
+      padding: 11px 14px;
+      font-size: 13px;
+      line-height: 1.62;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      white-space: pre-wrap;
+      position: relative;
+    }
+
+    .ff-ai-message.ff-ai-user .ff-ai-msg-body {
+      background: linear-gradient(135deg, rgba(227, 6, 59, 0.95), rgba(161, 4, 43, 0.95));
+      border: none;
+      color: #fff;
+      box-shadow: 0 10px 28px rgba(227, 6, 59, 0.32);
+    }
+
+    .ff-ai-message.ff-ai-coach .ff-ai-msg-body {
+      background:
+        linear-gradient(170deg, rgba(30, 41, 59, 0.92), rgba(15, 23, 42, 0.96));
+      border: 1px solid rgba(71, 85, 105, 0.7);
+    }
+
+    .ff-ai-msg-body.typing::after {
       content: "";
       width: 6px;
       height: 1.1em;
@@ -829,12 +868,17 @@
       vertical-align: bottom;
     }
 
-    .ff-ai-quick {
+    .ff-ai-toolbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
       flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .ff-ai-toolbar .ff-ai-label {
+      font-size: 11px;
     }
 
     .ff-ai-quick-buttons {
@@ -845,19 +889,93 @@
 
     .ff-ai-status-row {
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
       align-items: center;
       padding-top: 6px;
+      font-size: 11px;
+      margin-top: 4px;
     }
 
-    .ff-ai-input-row {
+    .ff-ai-input-bar {
       display: flex;
+      align-items: flex-end;
       gap: 10px;
-      align-items: stretch;
+      background: rgba(2, 6, 23, 0.82);
+      border: 1px solid rgba(71, 85, 105, 0.8);
+      border-radius: 18px;
+      padding: 10px 12px;
+      margin-top: 14px;
     }
 
-    .ff-ai-question-wrap .ff-ai-textarea {
-      flex: 1 1 auto;
+    .ff-ai-input-bar .ff-ai-textarea {
+      flex: 1;
+      background: transparent;
+      border: none;
+      padding: 0;
+      min-height: 28px;
+      max-height: 160px;
+      resize: none;
+      box-shadow: none;
+    }
+
+    .ff-ai-input-bar .ff-ai-textarea:focus {
+      outline: none;
+      border: none;
+      box-shadow: none;
+    }
+
+    .ff-ai-stop-btn {
+      border: none;
+      border-radius: 12px;
+      background: rgba(248, 113, 113, 0.12);
+      color: #fca5a5;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: filter 0.2s ease, background 0.2s ease;
+    }
+
+    .ff-ai-stop-btn:not(:disabled):hover {
+      filter: brightness(1.1);
+    }
+
+    .ff-ai-stop-btn:disabled {
+      opacity: 0.55;
+      background: rgba(71, 85, 105, 0.45);
+      color: rgba(203, 213, 225, 0.8);
+      cursor: not-allowed;
+    }
+
+    .ff-ai-context-panel {
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      background: rgba(2, 6, 23, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 16px;
+      padding: 14px;
+      margin-top: 10px;
+    }
+
+    .ff-ai-context-panel.open {
+      display: flex;
+    }
+
+    .ff-ai-tip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--ff-muted);
+      margin-top: 6px;
+    }
+
+    .ff-ai-tip i {
+      color: #facc15;
     }
 
     .ff-ai-send-btn {
@@ -1190,9 +1308,21 @@
                 schedule</strong> tuned for working professionals.
               </div>
             </div>
-            <span class="ff-badge-soft" id="bandBadge">
-              <i class="fa-solid fa-hourglass-half"></i> No run yet
-            </span>
+            <div class="ff-card-actions">
+              <button
+                type="button"
+                class="ff-share-btn"
+                id="shareWhatsappBtn"
+                disabled
+                aria-label="Share key metrics via WhatsApp"
+              >
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>Share</span>
+              </button>
+              <span class="ff-badge-soft" id="bandBadge">
+                <i class="fa-solid fa-hourglass-half"></i> No run yet
+              </span>
+            </div>
           </div>
 
           <div class="row g-3">
@@ -1299,7 +1429,7 @@
               </div>
             </div>
             <div class="ff-ai-controls">
-              <button type="button" class="ff-ai-chip neutral" id="resetAiBtn">
+              <button type="button" class="ff-ai-reset" id="resetAiBtn">
                 <i class="fa-solid fa-rotate"></i>
                 <span>Reset</span>
               </button>
@@ -1317,11 +1447,43 @@
             </div>
           </div>
 
-          <div class="ff-ai-input-row">
+          <div class="ff-ai-toolbar">
+            <span class="ff-ai-label">Quick context</span>
+            <div class="ff-ai-quick-buttons">
+              <button type="button" class="ff-ai-chip" id="insertContextBtn" disabled>
+                <i class="fa-solid fa-bolt"></i>
+                <span>Analyzer summary</span>
+              </button>
+              <button type="button" class="ff-ai-chip" id="clearContextBtn" disabled>
+                <i class="fa-solid fa-eraser"></i>
+                <span>Clear context</span>
+              </button>
+              <button type="button" class="ff-ai-chip" id="toggleContextBtn" aria-pressed="false">
+                <i class="fa-solid fa-note-sticky"></i>
+                <span>Notes</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="ff-ai-context-panel" id="aiContextPanel">
+            <textarea
+              class="ff-ai-textarea ff-ai-context"
+              id="aiContextInput"
+              placeholder="Add injuries, limitations, or schedule notes."
+            ></textarea>
+            <div class="ff-ai-hint">Everything in this box is appended to each FitAI request.</div>
+          </div>
+
+          <div class="ff-ai-input-bar">
+            <button type="button" class="ff-ai-stop-btn" id="stopResponseBtn" disabled>
+              <i class="fa-solid fa-stop"></i>
+              <span>Stop</span>
+            </button>
             <textarea
               class="ff-ai-textarea ff-ai-question"
               id="aiPrompt"
               placeholder="Ask FitAI how to stay on track during a 60-hour workweek..."
+              rows="1"
             ></textarea>
             <button
               class="ff-ai-send-btn"
@@ -1334,38 +1496,25 @@
             </button>
           </div>
 
-          <div class="ff-ai-quick">
-            <span class="ff-ai-label">Quick context</span>
-            <div class="ff-ai-quick-buttons">
-              <button type="button" class="ff-ai-chip" id="insertContextBtn" disabled>
-                <i class="fa-solid fa-bolt"></i>
-                <span>Insert summary</span>
-              </button>
-              <button type="button" class="ff-ai-chip" id="clearContextBtn" disabled>
-                <i class="fa-solid fa-eraser"></i>
-                <span>Clear all</span>
-              </button>
-            </div>
-          </div>
-
-          <div class="ff-ai-response-wrapper">
-            <div class="ff-ai-response" id="aiResponse"></div>
-          </div>
-
-          <div class="ff-ai-status-row">
-            <button type="button" class="ff-ai-chip danger" id="stopResponseBtn" disabled>
-              <i class="fa-solid fa-stop"></i>
-              <span>Stop</span>
-            </button>
-            <div class="ff-status" id="aiStatus">
-              <span class="ff-status-dot"></span>
-              <span>Waiting for secure setup</span>
+          <div class="ff-ai-chat" id="aiChatLog">
+            <div class="ff-ai-empty" id="aiChatEmptyState">
+              <div>
+                <div style="font-size: 20px;">🏠✨</div>
+                <div>Welcome to FitAI. Ask about habits, recovery, or time-saving routines.</div>
+              </div>
             </div>
           </div>
 
           <div class="ff-ai-tip">
             <i class="fa-solid fa-lightbulb"></i>
             <span>Tip: Use context buttons to add current analysis data to your message.</span>
+          </div>
+
+          <div class="ff-ai-status-row">
+            <div class="ff-status" id="aiStatus">
+              <span class="ff-status-dot"></span>
+              <span>Waiting for secure setup</span>
+            </div>
           </div>
         </section>
         <button
@@ -1421,11 +1570,13 @@
     // ========= Pyodide SETUP & PYTHON ANALYTICS =========
     let pyodideReadyPromise = null;
     let lastAnalyticsText = "";
+    let lastShareText = "";
     let typingInterval = null;
     let isStreaming = false;
     let currentAbortController = null;
-    let currentStreamingText = "";
+    let activeAssistantBubble = null;
 
+    const contextInput = document.getElementById("aiContextInput");
     const promptInput = document.getElementById("aiPrompt");
     const insertContextBtn = document.getElementById("insertContextBtn");
     const clearContextBtn = document.getElementById("clearContextBtn");
@@ -1435,11 +1586,66 @@
     const aiCard = document.getElementById("coach");
     const collapseBtn = document.getElementById("aiCollapseBtn");
     const launcherBtn = document.getElementById("aiLauncherBtn");
+    const chatLog = document.getElementById("aiChatLog");
+    const chatEmptyState = document.getElementById("aiChatEmptyState");
+    const toggleContextBtn = document.getElementById("toggleContextBtn");
+    const contextPanel = document.getElementById("aiContextPanel");
+    const whatsappShareBtn = document.getElementById("shareWhatsappBtn");
+
+    function scrollChatToBottom() {
+      if (chatLog) {
+        chatLog.scrollTop = chatLog.scrollHeight;
+      }
+    }
+
+    function showEmptyStateIfNeeded() {
+      if (!chatLog || !chatEmptyState) return;
+      const hasMessages = chatLog.querySelector(".ff-ai-message");
+      chatEmptyState.style.display = hasMessages ? "none" : "flex";
+    }
+
+    function appendMessage(role, text) {
+      if (!chatLog) return null;
+      const messageEl = document.createElement("div");
+      messageEl.className = `ff-ai-message ${role === "user" ? "ff-ai-user" : "ff-ai-coach"}`;
+      const bodyEl = document.createElement("div");
+      bodyEl.className = "ff-ai-msg-body";
+      bodyEl.textContent = text || "";
+      messageEl.appendChild(bodyEl);
+      const insertBeforeNode = chatEmptyState && chatEmptyState.parentElement === chatLog
+        ? chatEmptyState
+        : null;
+      if (insertBeforeNode) {
+        chatLog.insertBefore(messageEl, insertBeforeNode);
+      } else {
+        chatLog.appendChild(messageEl);
+      }
+      showEmptyStateIfNeeded();
+      scrollChatToBottom();
+      return bodyEl;
+    }
+
+    function getLastAssistantBubble() {
+      if (!chatLog) return null;
+      const bubbles = chatLog.querySelectorAll(".ff-ai-message.ff-ai-coach .ff-ai-msg-body");
+      return bubbles.length ? bubbles[bubbles.length - 1] : null;
+    }
+
+    function clearChatLog() {
+      if (!chatLog) return;
+      chatLog.querySelectorAll(".ff-ai-message").forEach((node) => node.remove());
+      activeAssistantBubble = null;
+      showEmptyStateIfNeeded();
+    }
 
     function syncContextButtons() {
-      if (clearContextBtn && promptInput) {
-        const hasContent = Boolean(promptInput.value.trim());
-        clearContextBtn.disabled = !hasContent;
+      const hasContextText = contextInput ? Boolean(contextInput.value.trim()) : false;
+      if (clearContextBtn) {
+        clearContextBtn.disabled = !hasContextText;
+      }
+      if (toggleContextBtn && contextPanel) {
+        const isOpen = contextPanel.classList.contains("open");
+        toggleContextBtn.classList.toggle("active", isOpen || hasContextText);
       }
       if (stopResponseBtn) {
         const hasActive = isStreaming || currentAbortController !== null;
@@ -1447,10 +1653,43 @@
       }
     }
 
-    if (promptInput) {
-      promptInput.addEventListener("input", () => {
+    function toAsciiShare(value) {
+      if (!value) return "";
+      return String(value)
+        .replace(/[–—]/g, "-")
+        .replace(/•/g, "-")
+        .replace(/→/g, "->")
+        .replace(/’/g, "'")
+        .replace(/“|”/g, '"')
+        .replace(/…/g, "...")
+        .replace(/\u00A0/g, " ");
+    }
+
+    if (contextInput) {
+      contextInput.addEventListener("input", () => {
         syncContextButtons();
       });
+    }
+
+    if (toggleContextBtn && contextPanel) {
+      toggleContextBtn.addEventListener("click", () => {
+        const isOpen = contextPanel.classList.toggle("open");
+        toggleContextBtn.setAttribute("aria-pressed", isOpen ? "true" : "false");
+        if (isOpen && contextInput) {
+          contextInput.focus();
+        }
+        syncContextButtons();
+      });
+    }
+
+    if (promptInput) {
+      const adjustPromptHeight = () => {
+        promptInput.style.height = "auto";
+        const newHeight = Math.min(promptInput.scrollHeight, 160);
+        promptInput.style.height = newHeight + "px";
+      };
+      adjustPromptHeight();
+      promptInput.addEventListener("input", adjustPromptHeight);
       promptInput.addEventListener("keydown", (event) => {
         if (event.key === "Enter" && !event.shiftKey) {
           event.preventDefault();
@@ -1461,44 +1700,48 @@
       });
     }
 
-    if (insertContextBtn && promptInput) {
+    if (insertContextBtn && contextInput) {
       insertContextBtn.addEventListener("click", () => {
         if (!lastAnalyticsText) return;
-        const currentText = promptInput.value.trim();
-        if (currentText) {
-          promptInput.value = lastAnalyticsText + "\n\n" + currentText;
-        } else {
-          promptInput.value = lastAnalyticsText;
+        contextInput.value = lastAnalyticsText;
+        contextInput.focus();
+        if (contextPanel) {
+          contextPanel.classList.add("open");
         }
-        promptInput.focus();
+        if (toggleContextBtn) {
+          toggleContextBtn.setAttribute("aria-pressed", "true");
+        }
         syncContextButtons();
       });
     }
 
-    if (clearContextBtn && promptInput) {
+    if (clearContextBtn && contextInput) {
       clearContextBtn.addEventListener("click", () => {
-        promptInput.value = "";
-        promptInput.focus();
+        contextInput.value = "";
+        if (contextPanel) {
+          contextPanel.classList.remove("open");
+        }
+        if (toggleContextBtn) {
+          toggleContextBtn.setAttribute("aria-pressed", "false");
+        }
         syncContextButtons();
       });
     }
 
     if (stopResponseBtn) {
       stopResponseBtn.addEventListener("click", () => {
-        const respEl = document.getElementById("aiResponse");
         const statusEl = document.getElementById("aiStatus");
         if (currentAbortController) {
           currentAbortController.abort();
           currentAbortController = null;
         }
+        const respEl = activeAssistantBubble || getLastAssistantBubble();
         if (respEl) {
-          // Find the last assistant message bubble being streamed
-          const assistantBubbles = respEl.querySelectorAll(".ff-chat-assistant-msg");
-          const lastBubble = assistantBubbles[assistantBubbles.length - 1];
-          if (lastBubble && currentStreamingText) {
-            stopStreaming(lastBubble, currentStreamingText);
+          stopStreaming(respEl);
+          if (!respEl.textContent.trim()) {
+            respEl.textContent = "Response stopped.";
           }
-          currentStreamingText = "";
+          scrollChatToBottom();
         }
         if (statusEl) {
           statusEl.innerHTML =
@@ -1508,23 +1751,39 @@
       });
     }
 
+    if (whatsappShareBtn) {
+      whatsappShareBtn.addEventListener("click", () => {
+        if (!lastShareText) {
+          return;
+        }
+        const shareUrl = "https://wa.me/?text=" + encodeURIComponent(lastShareText);
+        window.open(shareUrl, "_blank");
+      });
+    }
+
     if (resetAiBtn) {
       resetAiBtn.addEventListener("click", () => {
-        const respEl = document.getElementById("aiResponse");
         const statusEl = document.getElementById("aiStatus");
         if (currentAbortController) {
           currentAbortController.abort();
           currentAbortController = null;
         }
-        if (respEl) {
-          // Clear all chat messages
-          respEl.innerHTML = "";
-        }
+        stopStreaming(activeAssistantBubble);
+        clearChatLog();
+        activeAssistantBubble = null;
         if (promptInput) {
           promptInput.value = "";
+          promptInput.focus();
+          promptInput.dispatchEvent(new Event("input"));
         }
         if (contextInput) {
           contextInput.value = "";
+        }
+        if (contextPanel) {
+          contextPanel.classList.remove("open");
+        }
+        if (toggleContextBtn) {
+          toggleContextBtn.setAttribute("aria-pressed", "false");
         }
         syncContextButtons();
         if (statusEl) {
@@ -1535,6 +1794,7 @@
     }
 
     syncContextButtons();
+  showEmptyStateIfNeeded();
 
     const PYTHON_CODE = `
 import json
@@ -1680,28 +1940,16 @@ def analyze_fitness(form_data):
     return json.dumps(result)
 `;
 
-    function stopStreaming(el, fullText) {
+    function stopStreaming(el) {
       if (typingInterval) {
         clearTimeout(typingInterval);
         typingInterval = null;
       }
-      if (el && fullText) {
-        // Complete to next sentence boundary instead of cutting mid-sentence
-        const currentText = el.textContent || "";
-        if (currentText.length < fullText.length) {
-          const remaining = fullText.slice(currentText.length);
-          const sentenceEnd = remaining.search(/[.!?]\s/);
-          if (sentenceEnd !== -1) {
-            // Complete to end of current sentence
-            el.textContent = currentText + remaining.slice(0, sentenceEnd + 1);
-          } else {
-            // No sentence boundary found, show full text
-            el.textContent = fullText;
-          }
-        }
-      }
       if (el) {
         el.classList.remove("typing");
+        if (activeAssistantBubble === el) {
+          activeAssistantBubble = null;
+        }
       }
       isStreaming = false;
       syncContextButtons();
@@ -1710,14 +1958,14 @@ def analyze_fitness(form_data):
     function streamText(el, text) {
       if (!el) return;
       const fullText = text || "";
-      currentStreamingText = fullText;
-      stopStreaming(el, fullText);
+      stopStreaming(el);
       el.textContent = "";
       if (!fullText) {
         return;
       }
 
       el.classList.add("typing");
+      activeAssistantBubble = el;
       isStreaming = true;
       syncContextButtons();
 
@@ -1727,9 +1975,9 @@ def analyze_fitness(form_data):
       const typeNext = () => {
         idx = Math.min(fullText.length, idx + step);
         el.textContent = fullText.slice(0, idx);
+        scrollChatToBottom();
         if (idx >= fullText.length) {
-          stopStreaming(el, fullText);
-          currentStreamingText = "";
+          stopStreaming(el);
           return;
         }
         const currentChar = fullText[Math.max(0, idx - 1)];
@@ -2097,6 +2345,29 @@ def analyze_fitness(form_data):
         insertContextBtn.disabled = !hasContext;
         insertContextBtn.classList.toggle("ready", hasContext);
       }
+      const shareLines = [
+        "FitFirst Time-Crunch Snapshot",
+        `Score: ${(res.score ?? "-")}/100 (${res.band || "Pending"})`,
+        `Daily time budget: ${(res.daily_budget ?? "-")} min`,
+        `Sleep efficiency: ${(res.sleep_eff ?? "-")}%`,
+        `Sedentary load: ${(res.sedentary_load ?? "-")}%`,
+        `Activity index: ${(res.activity_idx ?? "-")}%`,
+        `Weekly trend: ${toAsciiShare(weeklyTrendValue)}`,
+        `Recovery: ${toAsciiShare(recoverySummary)}`,
+        `Focus blocks: ${toAsciiShare(focusSummary)}`,
+        `Screen wind-down: ${toAsciiShare(screenSummary)}`,
+      ];
+      if (renderedQuickWins.length) {
+        shareLines.push("Top quick wins:");
+        renderedQuickWins.slice(0, 2).forEach((tip) => {
+          shareLines.push("- " + toAsciiShare(tip));
+        });
+      }
+      shareLines.push("Shared from FitFirst Analyzer.");
+      lastShareText = shareLines.join("\n");
+      if (whatsappShareBtn) {
+        whatsappShareBtn.disabled = false;
+      }
       syncContextButtons();
     }
 
@@ -2111,6 +2382,8 @@ def analyze_fitness(form_data):
         expandFitAI();
         if (promptInput) {
           promptInput.focus();
+        } else if (contextInput) {
+          contextInput.focus();
         }
       });
     }
@@ -2135,45 +2408,50 @@ def analyze_fitness(form_data):
     initOpenAIStatus();
     if (askBtnEl) {
       askBtnEl.addEventListener("click", async () => {
-        const respEl = document.getElementById("aiResponse");
         const statusEl = document.getElementById("aiStatus");
         const btn = askBtnEl;
-        if (!respEl || !statusEl) {
+        if (!statusEl) {
           return;
         }
-        const userPrompt = (promptInput ? promptInput.value : "").trim();
+        const extraContext = contextInput ? contextInput.value.trim() : "";
+        const userPromptRaw = promptInput ? promptInput.value : "";
+        const userPrompt = userPromptRaw.trim();
 
         if (!promptInput) {
-          respEl.textContent = "Prompt input missing in DOM.";
+          appendMessage("coach", "Prompt input missing in DOM.");
+          statusEl.innerHTML =
+            '<span class="ff-status-dot err"></span><span>Prompt input missing in DOM.</span>';
           return;
         }
 
         if (!userPrompt) {
-          respEl.textContent = "Please type a question or scenario for FitAI.";
+          statusEl.innerHTML =
+            '<span class="ff-status-dot err"></span><span>Please type a question for FitAI.</span>';
+          promptInput.focus();
           return;
         }
-
-        // Clear input and show user message in chat
-        const userMessage = userPrompt;
-        promptInput.value = "";
-        
-        // Add user message to response area
-        const userMsgEl = document.createElement("div");
-        userMsgEl.className = "ff-chat-user-msg";
-        userMsgEl.textContent = userMessage;
-        respEl.appendChild(userMsgEl);
-        
-        // Create assistant message container
-        const assistantMsgEl = document.createElement("div");
-        assistantMsgEl.className = "ff-chat-assistant-msg";
-        respEl.appendChild(assistantMsgEl);
 
         btn.disabled = true;
         btn.innerHTML =
           '<i class="fa-solid fa-circle-notch fa-spin"></i><span>Thinking…</span>';
         statusEl.innerHTML =
           '<span class="ff-status-dot"></span><span>Connecting to FitAI…</span>';
-        assistantMsgEl.classList.add("typing");
+
+        stopStreaming(activeAssistantBubble);
+        activeAssistantBubble = null;
+
+        appendMessage("user", userPrompt);
+        if (promptInput) {
+          promptInput.value = "";
+          promptInput.dispatchEvent(new Event("input"));
+        }
+
+        const assistantBubble = appendMessage("coach", "");
+        if (assistantBubble) {
+          assistantBubble.classList.add("typing");
+          assistantBubble.textContent = "";
+          activeAssistantBubble = assistantBubble;
+        }
 
         if (currentAbortController) {
           currentAbortController.abort();
@@ -2200,9 +2478,16 @@ def analyze_fitness(form_data):
             });
           }
 
+          if (extraContext) {
+            messages.push({
+              role: "system",
+              content: "Additional user-supplied context: " + extraContext,
+            });
+          }
+
           messages.push({
             role: "user",
-            content: userMessage,
+            content: userPrompt,
           });
 
           const res = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -2227,20 +2512,36 @@ def analyze_fitness(form_data):
 
           const data = await res.json();
           const answer = data.choices?.[0]?.message?.content || "(No response)";
-          streamText(assistantMsgEl, answer);
+          if (assistantBubble) {
+            streamText(assistantBubble, answer);
+          } else {
+            appendMessage("coach", answer);
+          }
           statusEl.innerHTML =
             '<span class="ff-status-dot ok"></span><span>Response received from FitAI.</span>';
         } catch (err) {
           console.error(err);
-          stopStreaming(assistantMsgEl, currentStreamingText);
-          currentStreamingText = "";
+          if (assistantBubble) {
+            stopStreaming(assistantBubble);
+          }
           if (err.name === "AbortError") {
-            assistantMsgEl.textContent = "Response stopped.";
+            if (assistantBubble) {
+              assistantBubble.textContent = "Response stopped.";
+              scrollChatToBottom();
+            } else {
+              appendMessage("coach", "Response stopped.");
+            }
             statusEl.innerHTML =
               '<span class="ff-status-dot err"></span><span>Response stopped.</span>';
           } else {
-            assistantMsgEl.textContent =
+            const fallback =
               "We couldn't reach FitAI. Please verify your setup and try again.";
+            if (assistantBubble) {
+              assistantBubble.textContent = fallback;
+              scrollChatToBottom();
+            } else {
+              appendMessage("coach", fallback);
+            }
             statusEl.innerHTML =
               '<span class="ff-status-dot err"></span><span>FitAI connection error – check your setup.</span>';
           }
@@ -2252,6 +2553,9 @@ def analyze_fitness(form_data):
           btn.innerHTML =
             '<i class="fa-solid fa-paper-plane"></i><span>Send</span>';
           syncContextButtons();
+          if (promptInput) {
+            promptInput.focus();
+          }
         }
       });
     }

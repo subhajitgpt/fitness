@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FitFirst – Ask FitAI (Atlas Style)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap + Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
+
+  <style>
+    body {
+      background: radial-gradient(circle at 0 0, #1f2937 0, #020617 60%);
+      color: #e5e7eb;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+      padding: 40px;
+    }
+
+    .dummy-app {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px;
+      border-radius: 18px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.25);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+    }
+
+    /* ===============================
+       ASK ATLAS STYLE FLOATING AI
+    =============================== */
+
+    .ff-atlas-panel {
+      position: fixed;
+      right: 26px;
+      bottom: 26px;
+      width: 420px;
+      max-width: calc(100% - 32px);
+      background: linear-gradient(180deg, #0b1120, #020617);
+      border: 1px solid rgba(148,163,184,0.35);
+      border-radius: 22px;
+      box-shadow: 0 40px 90px rgba(0,0,0,0.9);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 999;
+    }
+
+    .ff-atlas-header {
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(2,6,23,0.9);
+      border-bottom: 1px solid rgba(148,163,184,0.28);
+    }
+
+    .ff-atlas-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .ff-atlas-controls button {
+      border: none;
+      border-radius: 8px;
+      background: rgba(59,130,246,0.15);
+      color: #bfdbfe;
+      font-size: 12px;
+      padding: 6px 10px;
+      margin-left: 6px;
+    }
+
+    .ff-atlas-chat {
+      padding: 16px;
+      height: 260px;
+      overflow-y: auto;
+      background: linear-gradient(180deg, rgba(15,23,42,0.9), rgba(2,6,23,0.95));
+    }
+
+    .ff-atlas-empty {
+      text-align: center;
+      font-size: 13px;
+      color: #9ca3af;
+      line-height: 1.6;
+      margin-top: 90px;
+    }
+
+    .ff-msg {
+      max-width: 80%;
+      padding: 10px 14px;
+      border-radius: 16px;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .ff-msg.user {
+      margin-left: auto;
+      background: linear-gradient(135deg, #e3063b, #a1042b);
+      color: #fff;
+    }
+
+    .ff-msg.ai {
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.25);
+    }
+
+    .ff-atlas-context {
+      padding: 12px 16px;
+      border-top: 1px solid rgba(148,163,184,0.25);
+      display: flex;
+      gap: 10px;
+      background: rgba(2,6,23,0.9);
+    }
+
+    .ff-context-btn {
+      flex: 1;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.4);
+      background: rgba(15,23,42,0.85);
+      color: #e5e7eb;
+      font-size: 11px;
+      padding: 6px 10px;
+    }
+
+    .ff-atlas-input {
+      display: flex;
+      gap: 8px;
+      padding: 12px;
+      background: rgba(2,6,23,0.95);
+      border-top: 1px solid rgba(148,163,184,0.25);
+    }
+
+    .ff-atlas-input textarea {
+      flex: 1;
+      background: transparent;
+      border: none;
+      resize: none;
+      color: #f1f5f9;
+      font-size: 13px;
+      height: 36px;
+    }
+
+    .ff-atlas-input textarea:focus {
+      outline: none;
+    }
+
+    .ff-atlas-send {
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #e3063b, #a1042b);
+      color: #fff;
+      padding: 0 14px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .ff-atlas-footer {
+      padding: 8px 12px;
+      font-size: 11px;
+      color: #9ca3af;
+      text-align: right;
+      background: rgba(2,6,23,0.95);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MAIN APP PLACEHOLDER (UNCHANGED LOGICALLY) -->
+  <div class="dummy-app">
+    <h2>FitFirst – Time Crunch Analyzer</h2>
+    <p>This represents your **existing full UI + Pyodide logic**.</p>
+    <p>The floating FitAI below is the only redesigned part.</p>
+  </div>
+
+  <!-- ============================
+        ASK ATLAS STYLE AI PANEL
+  ============================ -->
+
+  <div class="ff-atlas-panel">
+
+    <!-- HEADER -->
+    <div class="ff-atlas-header">
+      <div class="ff-atlas-title">
+        ✨ Ask FitAI
+      </div>
+      <div class="ff-atlas-controls">
+        <button>Reset</button>
+        <button>×</button>
+      </div>
+    </div>
+
+    <!-- CHAT -->
+    <div class="ff-atlas-chat" id="ffChat">
+      <div class="ff-atlas-empty">
+        🏠✨<br/>
+        Welcome to FitAI. Ask about habits, recovery, or time-saving routines.
+      </div>
+    </div>
+
+    <!-- QUICK CONTEXT -->
+    <div class="ff-atlas-context">
+      <button class="ff-context-btn">
+        📊 Analyzer Summary
+      </button>
+      <button class="ff-context-btn">
+        🧹 Clear Context
+      </button>
+    </div>
+
+    <!-- INPUT -->
+    <div class="ff-atlas-input">
+      <textarea id="ffPrompt" placeholder="Ask FitAI how to stay on track during a 60-hour workweek..."></textarea>
+      <button class="ff-atlas-send" onclick="sendMsg()">Send</button>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="ff-atlas-footer">
+      ● Session reset. Ready when you are.
+    </div>
+
+  </div>
+
+  <script>
+    function sendMsg(){
+      const input = document.getElementById("ffPrompt");
+      const chat = document.getElementById("ffChat");
+
+      if(!input.value.trim()) return;
+
+      const user = document.createElement("div");
+      user.className = "ff-msg user";
+      user.textContent = input.value;
+      chat.appendChild(user);
+
+      const ai = document.createElement("div");
+      ai.className = "ff-msg ai";
+      ai.textContent = "✅ FitAI received your question. (API response placeholder)";
+      chat.appendChild(ai);
+
+      input.value = "";
+      chat.scrollTop = chat.scrollHeight;
+    }
+  </script>
+
+</body>
+</html>
