@@ -375,109 +375,6 @@
       color: var(--ff-muted);
     }
 
-    .ff-whoop-upload {
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(37, 99, 235, 0.05));
-      border: 1px solid rgba(59, 130, 246, 0.25);
-      border-radius: 12px;
-      padding: 14px 16px;
-    }
-
-    .ff-whoop-input-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 8px;
-    }
-
-    .ff-file-input {
-      display: none;
-    }
-
-    .ff-file-label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      background: linear-gradient(135deg, rgba(34, 197, 94, 0.12), rgba(22, 163, 74, 0.08));
-      border: 1px solid rgba(34, 197, 94, 0.35);
-      border-radius: 8px;
-      color: #22c55e;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      flex: 1;
-      justify-content: center;
-    }
-
-    .ff-file-label:hover {
-      background: linear-gradient(135deg, rgba(34, 197, 94, 0.18), rgba(22, 163, 74, 0.12));
-      border-color: rgba(34, 197, 94, 0.5);
-    }
-
-    .ff-file-label.has-file {
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(37, 99, 235, 0.08));
-      border-color: rgba(59, 130, 246, 0.4);
-      color: #3b82f6;
-    }
-
-    .ff-file-clear {
-      padding: 8px 12px;
-      background: rgba(239, 68, 68, 0.15);
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      border-radius: 8px;
-      color: #ef4444;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .ff-file-clear:hover {
-      background: rgba(239, 68, 68, 0.25);
-      border-color: rgba(239, 68, 68, 0.5);
-    }
-
-    .ff-whoop-date-range {
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px solid rgba(59, 130, 246, 0.2);
-    }
-
-    .ff-form-label-sm {
-      font-size: 11px;
-      font-weight: 500;
-      color: rgba(226, 232, 240, 0.85);
-      margin-bottom: 4px;
-      display: block;
-    }
-
-    .ff-input-sm {
-      width: 100%;
-      padding: 6px 10px;
-      background: rgba(2, 6, 23, 0.9);
-      border: 1px solid rgba(55, 65, 81, 0.95);
-      border-radius: 8px;
-      color: #f1f5f9;
-      font-size: 12px;
-      transition: border 0.2s;
-      cursor: pointer;
-    }
-
-    .ff-input-sm:focus {
-      outline: none;
-      border-color: var(--ff-accent);
-    }
-
-    .ff-input-sm::-webkit-calendar-picker-indicator {
-      cursor: pointer;
-      filter: invert(1);
-      opacity: 0.7;
-      transition: opacity 0.2s;
-    }
-
-    .ff-input-sm::-webkit-calendar-picker-indicator:hover {
-      opacity: 1;
-    }
-
     /* Results */
 
     .ff-score-ring {
@@ -1262,66 +1159,6 @@
               </div>
             </div>
 
-            <!-- WHOOP Data Upload (Optional) -->
-            <div class="row g-3 mt-2">
-              <div class="col-12">
-                <div class="ff-whoop-upload">
-                  <label class="ff-form-label">
-                    <i class="fa-solid fa-heart-pulse"></i> WHOOP Data (Optional)
-                  </label>
-                  <div class="ff-whoop-input-wrapper">
-                    <input
-                      type="file"
-                      id="whoopFileInput"
-                      class="ff-file-input"
-                      accept=".csv"
-                    />
-                    <label for="whoopFileInput" class="ff-file-label">
-                      <i class="fa-solid fa-upload"></i>
-                      <span id="whoopFileName">Upload WHOOP CSV</span>
-                    </label>
-                    <button
-                      type="button"
-                      id="clearWhoopBtn"
-                      class="ff-file-clear"
-                      style="display: none;"
-                    >
-                      <i class="fa-solid fa-times"></i>
-                    </button>
-                  </div>
-                  <div class="ff-small mt-1">
-                    <span id="whoopStatus">Upload your WHOOP data export to enhance recovery & strain scoring</span>
-                  </div>
-                  
-                  <!-- Date Range Filter -->
-                  <div class="ff-whoop-date-range" id="whoopDateRange" style="display: none;">
-                    <div class="row g-2 mt-2">
-                      <div class="col-md-6">
-                        <label class="ff-form-label-sm">From Date</label>
-                        <input
-                          type="date"
-                          id="whoopStartDate"
-                          class="ff-input-sm"
-                        />
-                      </div>
-                      <div class="col-md-6">
-                        <label class="ff-form-label-sm">To Date</label>
-                        <input
-                          type="date"
-                          id="whoopEndDate"
-                          class="ff-input-sm"
-                        />
-                      </div>
-                    </div>
-                    <div class="ff-small mt-1">
-                      <i class="fa-solid fa-info-circle"></i>
-                      <span id="whoopDateInfo">Select date range to filter cycles</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             <div class="d-flex justify-content-between align-items-center mt-3">
               <button
                 type="button"
@@ -1588,7 +1425,6 @@
     let isStreaming = false;
     let currentAbortController = null;
     let currentStreamingText = "";
-    let whoopData = null;
 
     const promptInput = document.getElementById("aiPrompt");
     const insertContextBtn = document.getElementById("insertContextBtn");
@@ -1599,185 +1435,6 @@
     const aiCard = document.getElementById("coach");
     const collapseBtn = document.getElementById("aiCollapseBtn");
     const launcherBtn = document.getElementById("aiLauncherBtn");
-
-    // WHOOP file upload handlers
-    const whoopFileInput = document.getElementById("whoopFileInput");
-    const whoopFileName = document.getElementById("whoopFileName");
-    const whoopStatus = document.getElementById("whoopStatus");
-    const clearWhoopBtn = document.getElementById("clearWhoopBtn");
-    const whoopDateRange = document.getElementById("whoopDateRange");
-    const whoopStartDate = document.getElementById("whoopStartDate");
-    const whoopEndDate = document.getElementById("whoopEndDate");
-    const whoopDateInfo = document.getElementById("whoopDateInfo");
-
-    if (whoopFileInput) {
-      whoopFileInput.addEventListener("change", async (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        whoopFileName.textContent = file.name;
-        whoopFileName.parentElement.classList.add("has-file");
-        clearWhoopBtn.style.display = "block";
-        whoopStatus.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing WHOOP data...';
-
-        try {
-          const text = await file.text();
-          whoopData = parseWhoopCSV(text);
-          
-          // Show date range filter and set default dates
-          if (whoopDateRange) {
-            whoopDateRange.style.display = "block";
-            
-            // Set default to last 30 days from the most recent date
-            if (whoopData.cycles.length > 0) {
-              const dates = whoopData.cycles.map(c => new Date(c.date)).filter(d => !isNaN(d));
-              if (dates.length > 0) {
-                const maxDate = new Date(Math.max(...dates));
-                const minDate = new Date(maxDate);
-                minDate.setDate(minDate.getDate() - 30);
-                
-                whoopEndDate.value = maxDate.toISOString().split('T')[0];
-                whoopStartDate.value = minDate.toISOString().split('T')[0];
-                
-                // Set min/max on date inputs
-                const allMinDate = new Date(Math.min(...dates));
-                whoopStartDate.min = allMinDate.toISOString().split('T')[0];
-                whoopStartDate.max = maxDate.toISOString().split('T')[0];
-                whoopEndDate.min = allMinDate.toISOString().split('T')[0];
-                whoopEndDate.max = maxDate.toISOString().split('T')[0];
-                
-                updateWhoopDateFilter();
-              }
-            }
-          }
-          
-          whoopStatus.innerHTML = `<i class="fa-solid fa-check-circle"></i> Loaded ${whoopData.cycles.length} recovery cycles`;
-        } catch (err) {
-          whoopStatus.innerHTML = `<i class="fa-solid fa-exclamation-triangle"></i> Error: ${err.message}`;
-          whoopData = null;
-          if (whoopDateRange) whoopDateRange.style.display = "none";
-        }
-      });
-    }
-
-    if (clearWhoopBtn) {
-      clearWhoopBtn.addEventListener("click", () => {
-        whoopFileInput.value = "";
-        whoopFileName.textContent = "Upload WHOOP CSV";
-        whoopFileName.parentElement.classList.remove("has-file");
-        clearWhoopBtn.style.display = "none";
-        whoopStatus.textContent = "Upload your WHOOP data export to enhance recovery & strain scoring";
-        whoopData = null;
-        if (whoopDateRange) whoopDateRange.style.display = "none";
-      });
-    }
-
-    // Date range filter handlers
-    if (whoopStartDate) {
-      whoopStartDate.addEventListener("change", updateWhoopDateFilter);
-    }
-    if (whoopEndDate) {
-      whoopEndDate.addEventListener("change", updateWhoopDateFilter);
-    }
-
-    function updateWhoopDateFilter() {
-      if (!whoopData || !whoopStartDate || !whoopEndDate) return;
-      
-      const startDate = whoopStartDate.value ? new Date(whoopStartDate.value) : null;
-      const endDate = whoopEndDate.value ? new Date(whoopEndDate.value) : null;
-      
-      const allCycles = whoopData.allCycles || whoopData.cycles;
-      let filteredCycles = allCycles;
-      
-      if (startDate || endDate) {
-        filteredCycles = allCycles.filter(cycle => {
-          const cycleDate = new Date(cycle.date);
-          if (isNaN(cycleDate)) return false;
-          
-          if (startDate && cycleDate < startDate) return false;
-          if (endDate) {
-            const endOfDay = new Date(endDate);
-            endOfDay.setHours(23, 59, 59, 999);
-            if (cycleDate > endOfDay) return false;
-          }
-          return true;
-        });
-      }
-      
-      // Store all cycles if not already stored
-      if (!whoopData.allCycles) {
-        whoopData.allCycles = [...whoopData.cycles];
-      }
-      
-      // Update with filtered data
-      whoopData.cycles = filteredCycles;
-      whoopData.avgRecovery = filteredCycles.reduce((sum, c) => sum + c.recovery, 0) / filteredCycles.length;
-      whoopData.avgHRV = filteredCycles.reduce((sum, c) => sum + c.hrv, 0) / filteredCycles.length;
-      whoopData.avgRestingHR = filteredCycles.reduce((sum, c) => sum + c.restingHR, 0) / filteredCycles.length;
-      whoopData.avgStrain = filteredCycles.reduce((sum, c) => sum + c.strain, 0) / filteredCycles.length;
-      whoopData.avgSleepPerf = filteredCycles.reduce((sum, c) => sum + c.sleepPerf, 0) / filteredCycles.length;
-      whoopData.avgSleepHours = filteredCycles.reduce((sum, c) => sum + c.sleepHours, 0) / filteredCycles.length;
-      
-      if (whoopDateInfo) {
-        whoopDateInfo.textContent = `Using ${filteredCycles.length} of ${allCycles.length} cycles`;
-      }
-    }
-
-    function parseWhoopCSV(csvText) {
-      const lines = csvText.trim().split("\n");
-      if (lines.length < 2) throw new Error("CSV file is empty or invalid");
-
-      const headers = lines[0].split(",").map(h => h.trim());
-      const cycles = [];
-
-      for (let i = 1; i < lines.length; i++) {
-        const values = lines[i].split(",");
-        if (values.length !== headers.length) continue;
-
-        const row = {};
-        headers.forEach((header, idx) => {
-          row[header] = values[idx].trim();
-        });
-
-        // Parse date - check for common WHOOP date column names
-        let dateStr = row["Cycle start time"] || row["Cycle start"] || row["Date"] || "";
-        let cycleDate = null;
-        
-        if (dateStr) {
-          // Handle different date formats
-          cycleDate = new Date(dateStr);
-          if (isNaN(cycleDate)) {
-            // Try parsing common formats
-            const parts = dateStr.split(/[\/\-\s]/);
-            if (parts.length >= 3) {
-              cycleDate = new Date(parts[2], parts[0] - 1, parts[1]);
-            }
-          }
-        }
-
-        cycles.push({
-          date: cycleDate && !isNaN(cycleDate) ? cycleDate.toISOString().split('T')[0] : dateStr,
-          recovery: parseFloat(row["Recovery score"]) || 0,
-          hrv: parseFloat(row["HRV"]) || 0,
-          restingHR: parseFloat(row["Resting heart rate"]) || 0,
-          strain: parseFloat(row["Day Strain"]) || 0,
-          sleepPerf: parseFloat(row["Sleep performance %"]) || 0,
-          sleepHours: parseFloat(row["Asleep duration (minutes)"]) / 60 || 0,
-          remHours: parseFloat(row["REM duration (minutes)"]) / 60 || 0,
-          deepSleep: parseFloat(row["Deep (SWS) duration (minutes)"]) / 60 || 0,
-        });
-      }
-
-      return {
-        cycles,
-        avgRecovery: cycles.reduce((sum, c) => sum + c.recovery, 0) / cycles.length,
-        avgHRV: cycles.reduce((sum, c) => sum + c.hrv, 0) / cycles.length,
-        avgRestingHR: cycles.reduce((sum, c) => sum + c.restingHR, 0) / cycles.length,
-        avgStrain: cycles.reduce((sum, c) => sum + c.strain, 0) / cycles.length,
-        avgSleepPerf: cycles.reduce((sum, c) => sum + c.sleepPerf, 0) / cycles.length,
-        avgSleepHours: cycles.reduce((sum, c) => sum + c.sleepHours, 0) / cycles.length,
-      };
-    }
 
     function syncContextButtons() {
       if (clearContextBtn && promptInput) {
@@ -1895,7 +1552,7 @@ def _safe_float(val, default=0.0):
     except Exception:
         return default
 
-def analyze_fitness(form_data, whoop_data=None):
+def analyze_fitness(form_data):
     # form_data is a JS object converted to Python dict
     age = _safe_float(form_data.get("age"), 35)
     bmi = _safe_float(form_data.get("bmi"), 27)
@@ -1908,49 +1565,11 @@ def analyze_fitness(form_data, whoop_data=None):
     late_screen = _safe_float(form_data.get("late_screen"), 2)
     free_blocks = _safe_float(form_data.get("free_blocks"), 2)
 
-    # WHOOP data integration
-    whoop_recovery_score = 0
-    whoop_boost = 0
-    has_whoop = False
-    
-    if whoop_data and isinstance(whoop_data, dict):
-        has_whoop = True
-        avg_recovery = _safe_float(whoop_data.get("avgRecovery"), 0)
-        avg_hrv = _safe_float(whoop_data.get("avgHRV"), 0)
-        avg_resting_hr = _safe_float(whoop_data.get("avgRestingHR"), 0)
-        avg_strain = _safe_float(whoop_data.get("avgStrain"), 0)
-        avg_sleep_perf = _safe_float(whoop_data.get("avgSleepPerf"), 0)
-        avg_sleep_hours = _safe_float(whoop_data.get("avgSleepHours"), 0)
-        
-        # Override sleep data if WHOOP data is more accurate
-        if avg_sleep_hours > 0:
-            avg_sleep = avg_sleep_hours
-        
-        # Calculate WHOOP-based recovery score (0-1 scale)
-        whoop_recovery_score = avg_recovery / 100.0  # WHOOP recovery is 0-100
-        
-        # Boost score based on good recovery metrics
-        if avg_recovery >= 67:  # Green zone
-            whoop_boost += 0.1
-        elif avg_recovery <= 33:  # Red zone
-            whoop_boost -= 0.15
-        
-        # HRV consideration (higher is better for recovery)
-        if avg_hrv > 50:
-            whoop_boost += 0.05
-        elif avg_hrv < 30:
-            whoop_boost -= 0.05
-
     # ---- Time & Load Model ----
     time_load = (work_hours + commute_minutes / 60.0 + sitting_hours / 3.0) / 24.0
     time_load = max(0.0, min(1.6, time_load))
 
     recovery = (avg_sleep / 8.0) - (stress_level - 3.0) * 0.1 - (late_screen * 0.05)
-    
-    # Integrate WHOOP recovery if available
-    if has_whoop:
-        recovery = (recovery * 0.6) + (whoop_recovery_score * 0.4)
-    
     recovery = max(-0.5, min(1.2, recovery))
 
     activity = weekly_workouts / 5.0
@@ -1958,10 +1577,6 @@ def analyze_fitness(form_data, whoop_data=None):
 
     # Key weighting: heavy penalty for overload + poor recovery
     score_raw = 0.45 * (1.0 - min(time_load, 1.2)) + 0.35 * recovery + 0.20 * activity
-
-    # Apply WHOOP boost
-    if has_whoop:
-        score_raw += whoop_boost
 
     # Additional penalty for very low free blocks
     if free_blocks <= 1:
@@ -2005,19 +1620,6 @@ def analyze_fitness(form_data, whoop_data=None):
 
     # Bottlenecks
     bottlenecks = []
-    
-    # WHOOP-specific bottlenecks
-    if has_whoop:
-        if whoop_data.get("avgRecovery", 0) < 33:
-            bottlenecks.append("WHOOP: Low recovery (red zone) – prioritize sleep quality and reduce training load.")
-        if whoop_data.get("avgHRV", 0) < 30:
-            bottlenecks.append("WHOOP: Low HRV indicates high stress – consider meditation or lighter workouts.")
-        if whoop_data.get("avgStrain", 0) > 15:
-            bottlenecks.append("WHOOP: High daily strain – ensure adequate recovery between intense sessions.")
-        if whoop_data.get("avgSleepPerf", 0) < 75:
-            bottlenecks.append("WHOOP: Sleep performance below 75% – optimize sleep environment and consistency.")
-    
-    # Standard bottlenecks
     if avg_sleep < 7:
         bottlenecks.append("Sleep debt – target +30 to +60 min earlier shutdown.")
     if late_screen >= 2:
@@ -2220,22 +1822,12 @@ def analyze_fitness(form_data, whoop_data=None):
 
         let analyzerFn = null;
         let pyFormData = null;
-        let pyWhoopData = null;
         try {
           await pyodideReadyPromise;
           const pyodide = window._pyodide;
           analyzerFn = pyodide.globals.get("analyze_fitness");
           pyFormData = pyodide.toPy(formData);
-          
-          // Pass WHOOP data if available
-          let jsonRes;
-          if (whoopData) {
-            pyWhoopData = pyodide.toPy(whoopData);
-            jsonRes = analyzerFn(pyFormData, pyWhoopData);
-          } else {
-            jsonRes = analyzerFn(pyFormData);
-          }
-          
+          const jsonRes = analyzerFn(pyFormData);
           const res = JSON.parse(jsonRes);
           updateUIWithResults(res);
           statusEl.textContent =
@@ -2252,9 +1844,6 @@ def analyze_fitness(form_data, whoop_data=None):
           btn.disabled = false;
           if (pyFormData && typeof pyFormData.destroy === "function") {
             pyFormData.destroy();
-          }
-          if (pyWhoopData && typeof pyWhoopData.destroy === "function") {
-            pyWhoopData.destroy();
           }
           if (analyzerFn && typeof analyzerFn.destroy === "function") {
             analyzerFn.destroy();
