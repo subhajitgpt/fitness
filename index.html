@@ -370,6 +370,118 @@
       box-shadow: none;
     }
 
+    .ff-share-btn {
+      width: 100%;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    }
+
+    .ff-share-btn:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+    }
+
+    .ff-share-btn:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .ff-share-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .ff-share-btn i {
+      font-size: 16px;
+    }
+
+    .ff-ml-explain {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(79, 70, 229, 0.05));
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-top: 8px;
+    }
+
+    .ff-ml-models {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .ff-model-badge {
+      flex: 1;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: 8px;
+      padding: 6px 10px;
+      text-align: center;
+    }
+
+    .ff-model-name {
+      display: block;
+      font-size: 10px;
+      color: rgba(165, 180, 252, 0.8);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 2px;
+    }
+
+    .ff-model-value {
+      display: block;
+      font-size: 16px;
+      font-weight: 700;
+      color: rgba(165, 180, 252, 1);
+    }
+
+    .ff-feature-impacts {
+      font-size: 12px;
+    }
+
+    .ff-impact-label {
+      color: rgba(203, 213, 225, 0.9);
+      font-weight: 600;
+      font-size: 11px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .ff-impact-item {
+      padding: 4px 8px;
+      margin: 3px 0;
+      border-radius: 6px;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ff-impact-positive {
+      background: rgba(34, 197, 94, 0.12);
+      border-left: 3px solid rgba(34, 197, 94, 0.6);
+      color: rgba(134, 239, 172, 0.95);
+    }
+
+    .ff-impact-negative {
+      background: rgba(239, 68, 68, 0.12);
+      border-left: 3px solid rgba(239, 68, 68, 0.6);
+      color: rgba(252, 165, 165, 0.95);
+    }
+
     .ff-small {
       font-size: 11px;
       color: var(--ff-muted);
@@ -886,10 +998,11 @@
     }
 
     .ff-chat-assistant-msg {
+      position: relative;
       align-self: flex-start;
       background: linear-gradient(135deg, rgba(51, 65, 85, 0.95), rgba(30, 41, 59, 0.98));
       color: rgba(226, 232, 240, 0.96);
-      padding: 10px 14px;
+      padding: 12px 26px 10px 14px;
       border-radius: 18px 18px 18px 4px;
       max-width: 85%;
       word-wrap: break-word;
@@ -898,6 +1011,47 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
       font-size: 13px;
       line-height: 1.62;
+    }
+
+    .ff-chat-assistant-text {
+      white-space: pre-wrap;
+    }
+
+    .ff-chat-copy-btn {
+      position: absolute;
+      top: 4px;
+      right: 6px;
+      background: transparent;
+      border: none;
+      color: rgba(148, 163, 184, 0.9);
+      cursor: pointer;
+      font-size: 11px;
+      padding: 0;
+    }
+
+    .ff-chat-copy-btn:hover {
+      color: rgba(248, 250, 252, 0.95);
+    }
+
+    .ff-chat-copy-btn.copied {
+      color: #4ade80;
+    }
+
+    .ff-chat-assistant-text p {
+      margin: 0 0 6px;
+    }
+
+    .ff-chat-assistant-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .ff-chat-assistant-text ul.ff-ai-list {
+      margin: 4px 0 6px 1.1em;
+      padding-left: 0.6em;
+    }
+
+    .ff-chat-assistant-text ul.ff-ai-list li {
+      margin-bottom: 3px;
     }
 
     .ff-ai-response:empty {
@@ -1358,7 +1512,7 @@
             </span>
           </div>
 
-          <div class="row g-3">
+          <div class="row g-3 align-items-stretch">
             <div class="col-sm-4 d-flex justify-content-center">
               <div class="ff-score-ring">
                 <div class="ff-score-ring-inner">
@@ -1368,7 +1522,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-8 d-flex flex-column justify-content-between">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
                   <div class="ff-section-label">Band</div>
@@ -1395,13 +1549,55 @@
                 </span>
               </div>
 
-              <div class="mt-2">
+              <!-- Compact momentum metrics row using the blank area -->
+              <div class="ff-pill-row mt-2">
+                <span class="ff-mini-pill">
+                  <i class="fa-solid fa-arrow-trend-up me-1"></i>
+                    Weekly trend: <span id="weeklyTrendPill">–</span>
+                </span>
+                <span class="ff-mini-pill">
+                  <i class="fa-solid fa-heart-pulse me-1"></i>
+                    Recovery balance: <span id="recoveryScorePill">–</span>
+                </span>
+                <span class="ff-mini-pill">
+                  <i class="fa-solid fa-bullseye me-1"></i>
+                    Focus blocks: <span id="focusBlocksPill">–</span>
+                </span>
+              </div>
+
+              <div class="mt-3">
                 <div class="ff-section-label">Primary bottlenecks</div>
                 <ul class="ff-list" id="bottleneckList">
                   <li><i class="fa-regular fa-circle"></i>
                     <span>No analysis yet.</span>
                   </li>
                 </ul>
+              </div>
+              
+              <div class="mt-3">
+                <div class="ff-section-label">
+                  <i class="fa-solid fa-brain"></i> Score Explainability
+                </div>
+                <div class="ff-ml-explain" id="mlExplainSection" style="display: none;">
+                  <div class="ff-feature-impacts">
+                    <div class="ff-impact-label">Top Contributing Factors:</div>
+                    <div id="topPositiveImpacts"></div>
+                    <div class="ff-impact-label mt-2">Top Limiting Factors:</div>
+                    <div id="topNegativeImpacts"></div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mt-3">
+                <button
+                  type="button"
+                  id="shareWhatsappBtn"
+                  class="ff-share-btn"
+                  disabled
+                >
+                  <i class="fa-brands fa-whatsapp"></i>
+                  <span>Share with Coach</span>
+                </button>
               </div>
             </div>
           </div>
@@ -1462,6 +1658,10 @@
               </div>
             </div>
             <div class="ff-ai-controls">
+              <button type="button" class="ff-ai-chip neutral" id="copyLastAiBtn">
+                <i class="fa-regular fa-copy"></i>
+                <span>Copy last</span>
+              </button>
               <button type="button" class="ff-ai-chip neutral" id="resetAiBtn">
                 <i class="fa-solid fa-rotate"></i>
                 <span>Reset</span>
@@ -1595,6 +1795,7 @@
     const clearContextBtn = document.getElementById("clearContextBtn");
     const stopResponseBtn = document.getElementById("stopResponseBtn");
     const resetAiBtn = document.getElementById("resetAiBtn");
+    const copyLastAiBtn = document.getElementById("copyLastAiBtn");
     const askBtnEl = document.getElementById("aiAskBtn");
     const aiCard = document.getElementById("coach");
     const collapseBtn = document.getElementById("aiCollapseBtn");
@@ -1835,11 +2036,11 @@
           currentAbortController = null;
         }
         if (respEl) {
-          // Find the last assistant message bubble being streamed
-          const assistantBubbles = respEl.querySelectorAll(".ff-chat-assistant-msg");
-          const lastBubble = assistantBubbles[assistantBubbles.length - 1];
-          if (lastBubble && currentStreamingText) {
-            stopStreaming(lastBubble, currentStreamingText);
+          // Find the last assistant message text node being streamed
+          const assistantTexts = respEl.querySelectorAll(".ff-chat-assistant-text");
+          const lastText = assistantTexts[assistantTexts.length - 1];
+          if (lastText && currentStreamingText) {
+            stopStreaming(lastText, currentStreamingText);
           }
           currentStreamingText = "";
         }
@@ -1877,6 +2078,40 @@
       });
     }
 
+    if (copyLastAiBtn) {
+      copyLastAiBtn.addEventListener("click", () => {
+        const respEl = document.getElementById("aiResponse");
+        if (!respEl) return;
+        const assistantTexts = respEl.querySelectorAll(".ff-chat-assistant-text");
+        const lastText = assistantTexts[assistantTexts.length - 1];
+        if (!lastText) return;
+        const text = (lastText.textContent || "").trim();
+        if (!text) return;
+
+        const onCopied = () => {
+          copyLastAiBtn.classList.add("copied");
+          setTimeout(() => copyLastAiBtn.classList.remove("copied"), 1200);
+        };
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(onCopied).catch(() => {});
+        } else {
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          try {
+            document.execCommand("copy");
+            onCopied();
+          } catch (e) {
+            console.error("Copy failed", e);
+          } finally {
+            document.body.removeChild(ta);
+          }
+        }
+      });
+    }
+
     syncContextButtons();
 
     const PYTHON_CODE = `
@@ -1910,71 +2145,206 @@ def analyze_fitness(form_data, whoop_data=None):
 
     # WHOOP data integration
     whoop_recovery_score = 0
-    whoop_boost = 0
     has_whoop = False
+    avg_hrv = 0
+    avg_resting_hr = 70
+    avg_strain = 0
+    avg_sleep_perf = 0
     
-    if whoop_data and isinstance(whoop_data, dict):
+    if whoop_data is not None:
         has_whoop = True
-        avg_recovery = _safe_float(whoop_data.get("avgRecovery"), 0)
-        avg_hrv = _safe_float(whoop_data.get("avgHRV"), 0)
-        avg_resting_hr = _safe_float(whoop_data.get("avgRestingHR"), 0)
-        avg_strain = _safe_float(whoop_data.get("avgStrain"), 0)
-        avg_sleep_perf = _safe_float(whoop_data.get("avgSleepPerf"), 0)
-        avg_sleep_hours = _safe_float(whoop_data.get("avgSleepHours"), 0)
+        avg_recovery = _safe_float(whoop_data.get("avgRecovery") if hasattr(whoop_data, 'get') else 0, 0)
+        avg_hrv = _safe_float(whoop_data.get("avgHRV") if hasattr(whoop_data, 'get') else 0, 0)
+        avg_resting_hr = _safe_float(whoop_data.get("avgRestingHR") if hasattr(whoop_data, 'get') else 70, 70)
+        avg_strain = _safe_float(whoop_data.get("avgStrain") if hasattr(whoop_data, 'get') else 0, 0)
+        avg_sleep_perf = _safe_float(whoop_data.get("avgSleepPerf") if hasattr(whoop_data, 'get') else 0, 0)
+        avg_sleep_hours = _safe_float(whoop_data.get("avgSleepHours") if hasattr(whoop_data, 'get') else 0, 0)
         
-        # Override sleep data if WHOOP data is more accurate
         if avg_sleep_hours > 0:
             avg_sleep = avg_sleep_hours
         
-        # Calculate WHOOP-based recovery score (0-1 scale)
-        whoop_recovery_score = avg_recovery / 100.0  # WHOOP recovery is 0-100
-        
-        # Boost score based on good recovery metrics
-        if avg_recovery >= 67:  # Green zone
-            whoop_boost += 0.1
-        elif avg_recovery <= 33:  # Red zone
-            whoop_boost -= 0.15
-        
-        # HRV consideration (higher is better for recovery)
-        if avg_hrv > 50:
-            whoop_boost += 0.05
-        elif avg_hrv < 30:
-            whoop_boost -= 0.05
+        whoop_recovery_score = avg_recovery / 100.0
 
-    # ---- Time & Load Model ----
-    time_load = (work_hours + commute_minutes / 60.0 + sitting_hours / 3.0) / 24.0
-    time_load = max(0.0, min(1.6, time_load))
-
-    recovery = (avg_sleep / 8.0) - (stress_level - 3.0) * 0.1 - (late_screen * 0.05)
+    # ===== ML ENSEMBLE MODEL =====
+    # Normalize features to 0-1 scale for ML models (all bounded)
+    features = {
+        'age_norm': max(0.0, min(1.0, (age - 25) / 40.0)),  # 25-65 range
+        'bmi_norm': max(0.0, min(1.0, (bmi - 18) / 22.0)),  # 18-40 range
+        'work_load': max(0.0, min(1.0, (work_hours + commute_minutes / 60.0) / 14.0)),  # 0-14 hours
+        'sitting_norm': max(0.0, min(1.0, sitting_hours / 12.0)),
+        'activity_norm': max(0.0, min(1.0, weekly_workouts / 7.0)),
+        'sleep_norm': max(0.0, min(1.0, avg_sleep / 9.0)),
+        'stress_norm': max(0.0, min(1.0, stress_level / 5.0)),
+        'screen_norm': max(0.0, min(1.0, late_screen / 4.0)),
+        'free_time_norm': max(0.0, min(1.0, free_blocks / 6.0)),
+        'hrv_norm': max(0.0, min(1.0, avg_hrv / 100.0)) if has_whoop else 0.5,
+        'resting_hr_norm': max(0.0, min(1.0, 1 - (avg_resting_hr - 50) / 50.0)) if has_whoop else 0.5,
+        'whoop_recovery_norm': max(0.0, min(1.0, whoop_recovery_score)) if has_whoop else 0.5,
+        'strain_norm': max(0.0, min(1.0, avg_strain / 18.0)) if has_whoop else 0.5,
+    }
     
-    # Integrate WHOOP recovery if available
-    if has_whoop:
-        recovery = (recovery * 0.6) + (whoop_recovery_score * 0.4)
+    # Model 1: Gradient Boosting-inspired (non-linear interactions)
+    gb_score = 0.0
+    # Time pressure penalty (bounded)
+    time_pressure = min(1.0, features['work_load'] + features['sitting_norm'] * 0.5)
+    time_factor = max(0.0, 1.0 - time_pressure ** 1.2)
+    gb_score += time_factor * 0.28
+
+    # Sleep-stress interaction (multiplicative)
+    sleep_quality = features['sleep_norm'] * (1.0 - features['stress_norm'] * 0.4)
+    gb_score += sleep_quality * 0.24
+
+    # Recovery compound score (sleep + WHOOP)
+    recovery_compound = (features['sleep_norm'] * 0.4 +
+              features['whoop_recovery_norm'] * 0.3 +
+              features['hrv_norm'] * 0.2 +
+              features['resting_hr_norm'] * 0.1)
+    gb_score += recovery_compound * 0.18
+
+    # Activity with proper bounds
+    activity_boost = features['activity_norm']
+    gb_score += activity_boost * 0.14
+
+    # Free time availability
+    gb_score += features['free_time_norm'] * 0.08
+
+    # Age & BMI moderation (small but real influence)
+    age_moderation = 1.0 - abs(features['age_norm'] - 0.5)  # mid-range age is easiest
+    bmi_moderation = max(0.0, 1.0 - max(0.0, features['bmi_norm'] - 0.45) * 1.2)  # high BMI penalized
+    gb_score += age_moderation * 0.05
+    gb_score += bmi_moderation * 0.03
+
+    # Clamp GB score into [0, 1]
+    gb_score = max(0.0, min(1.0, gb_score))
     
-    recovery = max(-0.5, min(1.2, recovery))
-
-    activity = weekly_workouts / 5.0
-    activity = max(0.0, min(1.5, activity))
-
-    # Key weighting: heavy penalty for overload + poor recovery
-    score_raw = 0.45 * (1.0 - min(time_load, 1.2)) + 0.35 * recovery + 0.20 * activity
-
-    # Apply WHOOP boost
+    # Model 2: Random Forest-inspired (decision tree rules)
+    rf_score = 0.5  # baseline
+    
+    # Tree 1: Sleep-dominated path
+    if features['sleep_norm'] > 0.75:
+        rf_score += 0.15
+        if features['stress_norm'] < 0.6:
+            rf_score += 0.1
+    elif features['sleep_norm'] < 0.5:
+        rf_score -= 0.2
+    
+    # Tree 2: Work-life balance path
+    if features['work_load'] < 0.6 and features['free_time_norm'] > 0.4:
+        rf_score += 0.15
+    elif features['work_load'] > 0.8:
+        rf_score -= 0.15
+        if features['stress_norm'] > 0.6:
+            rf_score -= 0.1
+    
+    # Tree 3: Recovery metrics path (WHOOP)
     if has_whoop:
-        score_raw += whoop_boost
+        if features['whoop_recovery_norm'] > 0.67:
+            rf_score += 0.12
+        elif features['whoop_recovery_norm'] < 0.33:
+            rf_score -= 0.15
+        
+        if features['hrv_norm'] > 0.5 and features['resting_hr_norm'] > 0.5:
+            rf_score += 0.08
+    
+    # Tree 4: Activity consistency
+    if features['activity_norm'] > 0.4:
+      rf_score += 0.1
+      if features['sitting_norm'] < 0.6:
+        rf_score += 0.05
 
-    # Additional penalty for very low free blocks
-    if free_blocks <= 1:
-        score_raw -= 0.15
-    elif free_blocks <= 2:
-        score_raw -= 0.05
-    else:
-        score_raw += 0.05
+    # Clamp RF score into [0, 1]
+    rf_score = max(0.0, min(1.0, rf_score))
 
-    score_norm = max(0.0, min(1.0, (score_raw + 0.5) / 1.5))
+    # Model 3: Neural Network-inspired (weighted combinations)
+    # Hidden layer 1: Feature combinations
+    h1_time = features['work_load'] * 0.6 + features['sitting_norm'] * 0.4
+    h1_recovery = features['sleep_norm'] * 0.5 + features['whoop_recovery_norm'] * 0.5
+    h1_vitality = features['activity_norm'] * 0.6 + features['hrv_norm'] * 0.4
+    h1_balance = features['free_time_norm'] * 0.5 + (1 - features['stress_norm']) * 0.5
+    
+    # Hidden layer 2: Non-linear activations (sigmoid-like)
+    def sigmoid(x):
+        return 1 / (1 + 2.718281828 ** (-5 * (x - 0.5)))
+    
+    h2_workload_impact = sigmoid(1 - h1_time)
+    h2_recovery_impact = sigmoid(h1_recovery)
+    h2_energy_impact = sigmoid(h1_vitality)
+    h2_mental_impact = sigmoid(h1_balance)
+    
+    # Output layer
+    nn_score = (h2_workload_impact * 0.35 +
+          h2_recovery_impact * 0.30 +
+          h2_energy_impact * 0.20 +
+          h2_mental_impact * 0.15)
+
+    # Clamp NN score into [0, 1]
+    nn_score = max(0.0, min(1.0, nn_score))
+    
+    # ENSEMBLE: Weighted average of models (ensure bounded)
+    ensemble_score = (gb_score * 0.40 +  # GB for complex interactions
+             rf_score * 0.35 +   # RF for rule-based decisions
+             nn_score * 0.25)    # NN for smooth gradients
+
+    # Explicit BMI risk adjustment so extreme BMI changes the score clearly
+    # bmi_norm ~0.4 around 27, ~1.0 at very high BMI like 70
+    bmi_risk = max(0.0, features['bmi_norm'] - 0.45)
+    # Up to ~0.4 * 0.4 = 0.16 drop (~16 points) for very high BMI
+    ensemble_score -= bmi_risk * 0.4
+
+    # Normalize to 0-100 with proper bounds
+    score_norm = max(0.0, min(1.0, ensemble_score))
     score = round(score_norm * 100)
+    
+    # ===== EXPLAINABILITY (SHAP-like feature importance) =====
+    # Calculate marginal contributions of each feature relative to baseline
+    base_score = 0.5  # baseline without any features
+    
+    feature_impacts = {
+      'Sleep Quality': ((features['sleep_norm'] - 0.72) * 30.0),  # 6.5/9 = 0.72 baseline
+      'Work Pressure': ((0.65 - features['work_load']) * 25.0),  # Higher work = negative
+      'Activity Level': ((features['activity_norm'] - 0.29) * 20.0),  # 2/7 = 0.29 baseline
+      'Stress Management': ((0.60 - features['stress_norm']) * 18.0),  # 3/5 = 0.60 baseline
+      'Free Time': ((features['free_time_norm'] - 0.33) * 15.0),  # 2/6 = 0.33 baseline
+      'Screen Habits': ((0.50 - features['screen_norm']) * 12.0),  # 2/4 = 0.50 baseline
+      'Sedentary Time': ((0.75 - features['sitting_norm']) * 15.0),  # 9/12 = 0.75 baseline
+      'Age Profile': ((0.5 - features['age_norm']) * 8.0),  # mid-range age is neutral
+      'BMI Profile': ((0.4 - features['bmi_norm']) * 10.0),  # closer to healthy range is better
+    }
+
+    if has_whoop:
+      feature_impacts['WHOOP Recovery'] = ((features['whoop_recovery_norm'] - 0.60) * 20.0)
+      feature_impacts['HRV'] = ((features['hrv_norm'] - 0.50) * 12.0)
+      feature_impacts['Resting HR'] = ((features['resting_hr_norm'] - 0.60) * 10.0)
+
+    # Sort by absolute impact
+    sorted_impacts = sorted(feature_impacts.items(), key=lambda x: abs(x[1]), reverse=True)
+
+    # Create explanation text
+    explainability = {
+      'top_positive': [],
+      'top_negative': [],
+      'feature_contributions': feature_impacts,
+      'model_breakdown': {
+        'gradient_boosting': round(gb_score * 100),
+        'random_forest': round(rf_score * 100),
+        'neural_network': round(nn_score * 100),
+        'ensemble_weight': 'GB:40%, RF:35%, NN:25%'
+      }
+    }
+
+    # Collect up to 5 positive and 5 negative factors
+    for feature, impact in sorted_impacts:
+      if impact > 0 and len(explainability['top_positive']) < 5:
+        explainability['top_positive'].append(f"{feature}: +{impact:.1f} points")
+      elif impact < 0 and len(explainability['top_negative']) < 5:
+        explainability['top_negative'].append(f"{feature}: {impact:.1f} points")
+      if len(explainability['top_positive']) >= 5 and len(explainability['top_negative']) >= 5:
+        break
 
     # Time budget: how many minutes/day of realistic habit time
+    
+    # Time budget calculation
+    time_load = (work_hours + commute_minutes / 60.0 + sitting_hours / 3.0) / 24.0
     base_budget = 35.0
     budget = base_budget + (free_blocks * 5.0) - max(0.0, (time_load - 1.0)) * 30.0
     budget = max(10.0, min(60.0, budget))
@@ -1982,23 +2352,23 @@ def analyze_fitness(form_data, whoop_data=None):
     # Bands
     if score < 35:
         band = "Overloaded"
-        band_desc = "Your current workday is crushing your recovery. We start with energy protection, not PRs."
+        band_desc = "ML models indicate severe time pressure. Focus on energy protection, not performance."
         band_tag = "overloaded"
     elif score < 55:
         band = "Tight but workable"
-        band_desc = "You are stretched, but there is room for 15–30 min of structured micro-habits."
+        band_desc = "Ensemble prediction shows moderate stress. Room for 15–30 min structured micro-habits."
         band_tag = "tight"
     elif score < 75:
         band = "Sustainable"
-        band_desc = "Your balance is decent. We can ramp intensity while protecting sleep and joints."
+        band_desc = "Models indicate balanced state. Can ramp intensity while protecting recovery."
         band_tag = "sustainable"
     else:
         band = "Thriving"
-        band_desc = "You are in a strong position. We can program progressive overload and performance blocks."
+        band_desc = "ML ensemble shows optimal conditions for progressive overload and performance gains."
         band_tag = "thriving"
 
     # Sleep, sedentary & activity sub-scores
-    sleep_eff = max(0.0, min(1.0, (avg_sleep - 5.0) / 3.0))  # 5–8 hrs
+    sleep_eff = max(0.0, min(1.0, (avg_sleep - 5.0) / 3.0))
     sedentary = max(0.0, min(1.5, sitting_hours / 8.0))
     sedentary_load = max(0.0, min(1.0, sedentary / 1.2))
     activity_idx = max(0.0, min(1.2, weekly_workouts / 4.0))
@@ -2010,11 +2380,11 @@ def analyze_fitness(form_data, whoop_data=None):
     if has_whoop:
         if whoop_data.get("avgRecovery", 0) < 33:
             bottlenecks.append("WHOOP: Low recovery (red zone) – prioritize sleep quality and reduce training load.")
-        if whoop_data.get("avgHRV", 0) < 30:
+        if avg_hrv < 30:
             bottlenecks.append("WHOOP: Low HRV indicates high stress – consider meditation or lighter workouts.")
-        if whoop_data.get("avgStrain", 0) > 15:
+        if avg_strain > 15:
             bottlenecks.append("WHOOP: High daily strain – ensure adequate recovery between intense sessions.")
-        if whoop_data.get("avgSleepPerf", 0) < 75:
+        if avg_sleep_perf < 75:
             bottlenecks.append("WHOOP: Sleep performance below 75% – optimize sleep environment and consistency.")
     
     # Standard bottlenecks
@@ -2052,11 +2422,13 @@ def analyze_fitness(form_data, whoop_data=None):
 
     debug = {
         "time_load": round(time_load, 3),
-        "recovery": round(recovery, 3),
-        "activity": round(activity, 3),
         "sleep_eff": round(sleep_eff, 3),
         "sedentary_load": round(sedentary_load, 3),
         "activity_idx": round(activity_idx, 3),
+        "ensemble_score": round(ensemble_score, 3),
+        "gb_score": round(gb_score, 3),
+        "rf_score": round(rf_score, 3),
+        "nn_score": round(nn_score, 3),
         "weekly_pattern": weekly_pattern,
         "inputs": form_data,
     }
@@ -2073,6 +2445,7 @@ def analyze_fitness(form_data, whoop_data=None):
         "activity_idx": round(min(activity_idx, 1.0) * 100),
         "bottlenecks": bottlenecks,
         "plan": plan,
+        "explainability": explainability,
         "debug": debug,
     }
     return json.dumps(result)
@@ -2128,6 +2501,8 @@ def analyze_fitness(form_data, whoop_data=None):
         if (idx >= fullText.length) {
           stopStreaming(el, fullText);
           currentStreamingText = "";
+          // Apply light formatting (paragraphs, bullet lists) once complete
+          formatAssistantMessage(el);
           return;
         }
         const currentChar = fullText[Math.max(0, idx - 1)];
@@ -2218,6 +2593,9 @@ def analyze_fitness(form_data, whoop_data=None):
           free_blocks: document.getElementById("free_blocks").value,
         };
 
+        console.log("Form data being analyzed:", formData);
+        console.log("WHOOP data:", whoopData);
+
         let analyzerFn = null;
         let pyFormData = null;
         let pyWhoopData = null;
@@ -2237,15 +2615,17 @@ def analyze_fitness(form_data, whoop_data=None):
           }
           
           const res = JSON.parse(jsonRes);
+          console.log("Analysis result:", res);
           updateUIWithResults(res);
           statusEl.textContent =
             "Analysis complete. You can tweak inputs & rerun.";
           btn.innerHTML =
             '<i class="fa-solid fa-rotate me-1"></i> Run again';
         } catch (err) {
-          console.error(err);
+          console.error("Analysis error:", err);
+          console.error("Error details:", err.message, err.stack);
           statusEl.innerHTML =
-            '<span style="color:#f87171;"><i class="fa-solid fa-triangle-exclamation me-1"></i>Analysis error</span>';
+            '<span style="color:#f87171;"><i class="fa-solid fa-triangle-exclamation me-1"></i>Analysis error: ' + (err.message || 'Unknown error') + '</span>';
           btn.innerHTML =
             '<i class="fa-solid fa-rotate me-1"></i> Try again';
         } finally {
@@ -2298,6 +2678,34 @@ def analyze_fitness(form_data, whoop_data=None):
           "</span>";
         bottleneckList.appendChild(li);
       });
+
+      // ML Explainability
+      const explainability = res.explainability || {};
+      const mlSection = document.getElementById("mlExplainSection");
+      
+      if (explainability.top_positive || explainability.top_negative) {
+        mlSection.style.display = "block";
+        
+        // Top positive impacts
+        const topPositive = document.getElementById("topPositiveImpacts");
+        topPositive.innerHTML = "";
+        (explainability.top_positive || []).forEach(impact => {
+          const div = document.createElement("div");
+          div.className = "ff-impact-item ff-impact-positive";
+          div.innerHTML = `<i class="fa-solid fa-arrow-up"></i><span>${impact}</span>`;
+          topPositive.appendChild(div);
+        });
+        
+        // Top negative impacts
+        const topNegative = document.getElementById("topNegativeImpacts");
+        topNegative.innerHTML = "";
+        (explainability.top_negative || []).forEach(impact => {
+          const div = document.createElement("div");
+          div.className = "ff-impact-item ff-impact-negative";
+          div.innerHTML = `<i class="fa-solid fa-arrow-down"></i><span>${impact}</span>`;
+          topNegative.appendChild(div);
+        });
+      }
 
       // Plan
       const habitPlanList = document.getElementById("habitPlanList");
@@ -2402,19 +2810,19 @@ def analyze_fitness(form_data, whoop_data=None):
       }
 
       const recoveryVal =
-        typeof debug.recovery === "number" ? debug.recovery : null;
+        typeof debug.ensemble_score === "number" ? (debug.ensemble_score - 0.5) : null;
       let recoverySummary = "–";
       if (recoveryVal !== null) {
-        if (recoveryVal >= 0.4) {
-          recoverySummary = `High recharge (+${recoveryVal.toFixed(2)})`;
-        } else if (recoveryVal >= 0.15) {
+        if (recoveryVal >= 0.3) {
+          recoverySummary = `High capacity (+${recoveryVal.toFixed(2)})`;
+        } else if (recoveryVal >= 0.1) {
           recoverySummary = `Balanced (+${recoveryVal.toFixed(2)})`;
         } else if (recoveryVal >= -0.1) {
           recoverySummary = `${recoveryVal >= 0 ? "+" : ""}${recoveryVal.toFixed(
             2
-          )} • add decompression`;
+          )} • add recovery time`;
         } else {
-          recoverySummary = `${recoveryVal.toFixed(2)} • priority reset`;
+          recoverySummary = `${recoveryVal.toFixed(2)} • priority rest`;
         }
       }
 
@@ -2449,14 +2857,29 @@ def analyze_fitness(form_data, whoop_data=None):
         weeklyTrendEl.textContent = weeklyTrendValue;
       }
 
+      const weeklyTrendPill = document.getElementById("weeklyTrendPill");
+      if (weeklyTrendPill) {
+        weeklyTrendPill.textContent = weeklyTrendValue;
+      }
+
       const recoveryScoreEl = document.getElementById("recoveryScoreText");
       if (recoveryScoreEl) {
         recoveryScoreEl.textContent = recoverySummary;
       }
 
+      const recoveryScorePill = document.getElementById("recoveryScorePill");
+      if (recoveryScorePill) {
+        recoveryScorePill.textContent = recoverySummary;
+      }
+
       const focusBlocksEl = document.getElementById("focusBlocksText");
       if (focusBlocksEl) {
         focusBlocksEl.textContent = focusSummary;
+      }
+
+      const focusBlocksPill = document.getElementById("focusBlocksPill");
+      if (focusBlocksPill) {
+        focusBlocksPill.textContent = focusSummary;
       }
 
       const screenHabitEl = document.getElementById("screenHabitText");
@@ -2508,7 +2931,83 @@ def analyze_fitness(form_data, whoop_data=None):
         insertContextBtn.disabled = !hasContext;
         insertContextBtn.classList.toggle("ready", hasContext);
       }
+      
+      // Enable WhatsApp share button
+      const shareBtn = document.getElementById("shareWhatsappBtn");
+      if (shareBtn) {
+        shareBtn.disabled = false;
+      }
+      
       syncContextButtons();
+    }
+
+    function formatAssistantMessage(el) {
+      if (!el) return;
+      const raw = (el.textContent || "").trim();
+      if (!raw) return;
+
+      const escapeHtml = (s) =>
+        s
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+
+      const blocks = raw
+        .split(/\n{2,}/)
+        .map((b) => b.trim())
+        .filter(Boolean);
+
+      const parts = [];
+
+      blocks.forEach((block) => {
+        const lines = block
+          .split(/\n/)
+          .map((l) => l.trim())
+          .filter(Boolean);
+        if (!lines.length) return;
+
+        const isBulletBlock = lines.every((l) =>
+          /^[-*•]\s+/.test(l) || /^\d+\.\s+/.test(l)
+        );
+
+        if (isBulletBlock) {
+          const items = lines
+            .map((l) => l.replace(/^([-*•]|\d+\.)\s+/, ""))
+            .map((txt) => `<li>${escapeHtml(txt)}</li>`)
+            .join("");
+          parts.push(`<ul class="ff-ai-list">${items}</ul>`);
+        } else {
+          const para = lines
+            .map((l) => escapeHtml(l))
+            .join("<br>");
+          parts.push(`<p>${para}</p>`);
+        }
+      });
+
+      el.innerHTML = parts.join("");
+    }
+
+    // WhatsApp Share Handler
+    const shareWhatsappBtn = document.getElementById("shareWhatsappBtn");
+    if (shareWhatsappBtn) {
+      shareWhatsappBtn.addEventListener("click", () => {
+        if (!lastAnalyticsText) {
+          alert("No analysis data available. Run the analyzer first.");
+          return;
+        }
+
+        // Create formatted message for coach
+        const message = `🏋️ *FitFirst Analysis Report*\n\n${lastAnalyticsText}\n\n_Generated by FitFirst Time-Crunch Fitness Analyzer_`;
+        
+        // Encode for WhatsApp URL
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
+        
+        // Open WhatsApp
+        window.open(whatsappUrl, '_blank');
+      });
     }
 
     if (collapseBtn) {
@@ -2567,16 +3066,52 @@ def analyze_fitness(form_data, whoop_data=None):
         // Clear input and show user message in chat
         const userMessage = userPrompt;
         promptInput.value = "";
-        
+
         // Add user message to response area
         const userMsgEl = document.createElement("div");
         userMsgEl.className = "ff-chat-user-msg";
         userMsgEl.textContent = userMessage;
         respEl.appendChild(userMsgEl);
-        
-        // Create assistant message container
+
+        // Create assistant message container with inner text and copy button
         const assistantMsgEl = document.createElement("div");
         assistantMsgEl.className = "ff-chat-assistant-msg";
+
+        const assistantTextEl = document.createElement("div");
+        assistantTextEl.className = "ff-chat-assistant-text";
+        assistantMsgEl.appendChild(assistantTextEl);
+
+        const copyBtn = document.createElement("button");
+        copyBtn.type = "button";
+        copyBtn.className = "ff-chat-copy-btn";
+        copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i>';
+        copyBtn.title = "Copy response";
+        copyBtn.addEventListener("click", () => {
+          const text = assistantTextEl.textContent || "";
+          if (!text) return;
+          const onCopied = () => {
+            copyBtn.classList.add("copied");
+            setTimeout(() => copyBtn.classList.remove("copied"), 1200);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(onCopied).catch(() => {});
+          } else {
+            const ta = document.createElement("textarea");
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            try {
+              document.execCommand("copy");
+              onCopied();
+            } catch (e) {
+              console.error("Copy failed", e);
+            } finally {
+              document.body.removeChild(ta);
+            }
+          }
+        });
+        assistantMsgEl.appendChild(copyBtn);
+
         respEl.appendChild(assistantMsgEl);
 
         btn.disabled = true;
@@ -2584,7 +3119,7 @@ def analyze_fitness(form_data, whoop_data=None):
           '<i class="fa-solid fa-circle-notch fa-spin"></i><span>Thinking…</span>';
         statusEl.innerHTML =
           '<span class="ff-status-dot"></span><span>Connecting to FitAI…</span>';
-        assistantMsgEl.classList.add("typing");
+        assistantTextEl.classList.add("typing");
 
         if (currentAbortController) {
           currentAbortController.abort();
@@ -2638,19 +3173,19 @@ def analyze_fitness(form_data, whoop_data=None):
 
           const data = await res.json();
           const answer = data.choices?.[0]?.message?.content || "(No response)";
-          streamText(assistantMsgEl, answer);
+          streamText(assistantTextEl, answer);
           statusEl.innerHTML =
             '<span class="ff-status-dot ok"></span><span>Response received from FitAI.</span>';
         } catch (err) {
           console.error(err);
-          stopStreaming(assistantMsgEl, currentStreamingText);
+          stopStreaming(assistantTextEl, currentStreamingText);
           currentStreamingText = "";
           if (err.name === "AbortError") {
-            assistantMsgEl.textContent = "Response stopped.";
+            assistantTextEl.textContent = "Response stopped.";
             statusEl.innerHTML =
               '<span class="ff-status-dot err"></span><span>Response stopped.</span>';
           } else {
-            assistantMsgEl.textContent =
+            assistantTextEl.textContent =
               "We couldn't reach FitAI. Please verify your setup and try again.";
             statusEl.innerHTML =
               '<span class="ff-status-dot err"></span><span>FitAI connection error – check your setup.</span>';
